@@ -14,14 +14,17 @@ public class YellowCard : MonoBehaviour
     private bool isRed;
     public GameObject redCard;
     public bool start;
+    public ParticleSystem explosion;
     public bool areSpawned;
-    
-    
+    public AudioClip destroySound;
+    private AudioSource source;
+
 
 
     // Start is called before the first frame update
     void Start()
     { 
+        
         if(areSpawned == true)
         {
             gameObject.SetActive(false);
@@ -29,10 +32,12 @@ public class YellowCard : MonoBehaviour
         Invoke("StartMoving", 1f);
         Invoke("SetActive", Random.Range(1.7f,3.1f));
         gM = GameObject.FindGameObjectWithTag("GameManager").GetComponent<GameManager>();
+        source = GameObject.FindGameObjectWithTag("GameManager").GetComponent<AudioSource>();
         Invoke(("StartMoving"), 0.5f);
         health = 1;
         speed = Random.Range(2,5);
         Player = GameObject.FindGameObjectWithTag("Player");
+        gM.enemiesAlive += 1;
     }
 
     // Update is called once per frame
@@ -52,12 +57,13 @@ public class YellowCard : MonoBehaviour
         if (collision.gameObject.CompareTag("Card"))
         {
 
+            gM.enemiesAlive -= 1;
 
             if (isRed == false)
             {
                 if(GetInstanceID() < collision.gameObject.GetInstanceID())
                 {
-                    gM.enemiesKilled += 1;
+                    
                     Instantiate(redCard, collision.gameObject.transform.position, Quaternion.identity);
                 }
                
@@ -74,12 +80,14 @@ public class YellowCard : MonoBehaviour
 
        else  if (collision.gameObject.CompareTag("Ball")  && ( start == true) && gM.isBallReturning == false)
         {
-         
+            source.PlayOneShot(destroySound, 1f);
             health -= 1;
             if (health <= 0)
             {
+                gM.enemiesAlive -= 1;
                 gM.enemiesKilled += 1;
-                Destroy(gameObject);
+                Instantiate(explosion, transform.position, Quaternion.identity);
+                Destroy(gameObject,0.1f);
             }
         }
         

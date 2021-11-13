@@ -7,13 +7,18 @@ public class RedCard : MonoBehaviour
     private float speed;
     private GameObject Player;
     private GameManager gM;
+    public ParticleSystem destroyParticle;
     [SerializeField] private int health = 3;
+    public AudioClip destroySound;
+    private AudioSource source;
     // Start is called before the first frame update
     void Start()
     {
         gM = GameObject.FindGameObjectWithTag("GameManager").GetComponent<GameManager>();
+        source = GameObject.FindGameObjectWithTag("GameManager").GetComponent<AudioSource>();
         speed = Random.Range(2,4);
         Player = GameObject.FindGameObjectWithTag("Player");
+        gM.enemiesAlive += 1;
     }
 
     // Update is called once per frame
@@ -34,8 +39,12 @@ public class RedCard : MonoBehaviour
             health -= 1;
             if (health <= 0)
             {
-                gM.enemiesKilled += 1;
-                Destroy(gameObject);
+
+                source.PlayOneShot(destroySound, 1f);
+                gM.enemiesAlive -= 1;
+                gM.enemiesKilled += 2;
+                Instantiate(destroyParticle, transform.position, Quaternion.identity);
+                Destroy(gameObject,0.1f);
             }
         }
        

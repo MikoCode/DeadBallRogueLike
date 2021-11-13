@@ -22,7 +22,7 @@ public class EnemyBullet : MonoBehaviour
         }
         else
         {
-            rb.velocity = new Vector3(moveDirection.x , moveDirection.y );
+            rb.velocity = new Vector3(moveDirection.x + Random.Range(-1.1f, 1.1f), moveDirection.y + Random.Range(-1.1f, 1.1f));
         }
       
         Destroy(gameObject,5f);
@@ -41,17 +41,14 @@ public class EnemyBullet : MonoBehaviour
     {
         if (collision.gameObject.CompareTag("Player"))
         {
-            Destroy(collision.gameObject);
+            
             Destroy(gameObject);
         }
         else if (collision.gameObject.CompareTag("Ball"))
         {
             Destroy(gameObject);
         }
-        else if (collision.gameObject.layer == 3)
-        {
-            Destroy(gameObject);
-        }
+        
     }
 
 

@@ -13,6 +13,7 @@ GameObject:
   - component: {fileID: 6921413650448550099}
   - component: {fileID: 6192533045808206975}
   - component: {fileID: -1428873743733850152}
+  - component: {fileID: -4359492560377237105}
   m_Layer: 1
   m_Name: FastEnemyShooting
   m_TagString: RedCard
@@ -100,11 +101,14 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   health: 2
   projectile: {fileID: 2461066563562653920, guid: cc447bf34a194024eb9104c8bc296b2a, type: 3}
-  startTimeBtwShoots: 0.1
+  startTimeBtwShoots: 0.3
   mode: 2
-  whenToShoot: 2
-  speed: 3
-  distanceToStop: 5
+  whenToShoot: 1
+  destroyParticle: {fileID: 7856131419282183252, guid: 5900c00c09afb4f4284959e89a8e39b0, type: 3}
+  speed: 4
+  distanceToStop: 4
+  areSpawned: 1
+  destroySound: {fileID: 8300000, guid: 7bef0064f8567430cac22499c6b93d4f, type: 3}
 --- !u!58 &6192533045808206975
 CircleCollider2D:
   m_ObjectHideFlags: 0
@@ -142,3 +146,15 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 0
+--- !u!114 &-4359492560377237105
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6921413650448550098}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: aa3e2263696594e4aadfbc76f97a7680, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 

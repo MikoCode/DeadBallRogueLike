@@ -18,6 +18,12 @@ TagManager:
   - Box
   - Pitch
   - Doors
+  - Bullet
+  - Spike
+  - Goalkeeper
+  - Smooth
+  - Music
+  - Pen
   layers:
   - Default
   - TransparentFX

@@ -16,12 +16,23 @@ public class EnemyShooting : MonoBehaviour
     private float curTimeBtwShoots;
     private bool startShooting, shooting, series;
     public float whenToShoot;
+    public ParticleSystem destroyParticle;
     public float speed;
     private Rigidbody2D rb;
     public float distanceToStop;
+    public bool areSpawned;
+    public AudioClip destroySound;
+    private AudioSource source;
+
     // Start is called before the first frame update
     void Start()
     {
+        if (areSpawned == true)
+        {
+            gameObject.SetActive(false);
+        }
+        Invoke("Active", Random.Range(1.7f, 3.1f));
+
         Invoke("StartShooting", whenToShoot);
         InvokeRepeating("GetPlayerPos",1f,Random.Range(4f,7f));
       
@@ -30,6 +41,8 @@ public class EnemyShooting : MonoBehaviour
         rb = gameObject.GetComponent<Rigidbody2D>();
         shooting = true;
         gM = GameObject.FindGameObjectWithTag("GameManager").GetComponent<GameManager>();
+        source = GameObject.FindGameObjectWithTag("GameManager").GetComponent<AudioSource>();
+        gM.enemiesAlive += 1;
     }
 
     // Update is called once per frame
@@ -49,8 +62,11 @@ public class EnemyShooting : MonoBehaviour
             health -= 1;
             if (health <= 0)
             {
+                gM.enemiesAlive -= 1;
+                source.PlayOneShot(destroySound, 1f);
                 gM.enemiesKilled += 1;
-                Destroy(gameObject);
+                Instantiate(destroyParticle, transform.position, Quaternion.identity);
+                Destroy(gameObject,0.1f);
             }
         }
         else if (collision.gameObject.CompareTag("Player") || (collision.gameObject.CompareTag("RedCard")))
@@ -149,7 +165,12 @@ public class EnemyShooting : MonoBehaviour
 
     void GetPlayerPos()
     {
-        newPos = new Vector2(playerCon.position.x + Random.Range(-4, 4), playerCon.position.y + Random.Range(-4, 4));
+        if (playerCon != null)
+        {
+            newPos = new Vector2(playerCon.position.x + Random.Range(-4.1f, 4.1f), playerCon.position.y + Random.Range(-4.1f, 4.1f));
+        }
+
+        
     }
 
 
@@ -158,7 +179,10 @@ public class EnemyShooting : MonoBehaviour
         startShooting = true;
     }
 
-    
+    void Active()
+    {
+        gameObject.SetActive(true);
+    }
 
    
 }

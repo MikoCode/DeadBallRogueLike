@@ -8,6 +8,9 @@ public class Goal : MonoBehaviour
     public GameObject ball;
     public bool refreshGoalKeeper;
     private GameManager gM;
+    public AudioClip goalSound;
+    public AudioClip playerTeleport;
+    private AudioSource source;
     public GameObject goalKeeper;
     public ParticleSystem goalExplosion;
     public GameObject[] posts;
@@ -23,6 +26,7 @@ public class Goal : MonoBehaviour
     {
        
         gM = GameObject.FindGameObjectWithTag("GameManager").GetComponent<GameManager>();
+        source = GameObject.FindGameObjectWithTag("GameManager").GetComponent<AudioSource>();
     }
 
     // Update is called once per frame
@@ -39,6 +43,7 @@ public class Goal : MonoBehaviour
             refreshGoalKeeper = true;
             didScore = true;
             goalLight.gameObject.SetActive(true);
+            source.PlayOneShot(goalSound, 0.5f);
             Instantiate(goalExplosion, transform.position, Quaternion.identity);
             for (int i = 0; i < posts.Length; i++)
             {
@@ -62,6 +67,7 @@ public class Goal : MonoBehaviour
             refreshGoalKeeper = true;
             didScore = true;
             goalLight.gameObject.SetActive(true);
+            source.PlayOneShot(goalSound, 0.5f);
             Instantiate(goalExplosion, transform.position, Quaternion.identity);
             for (int i = 0; i < posts.Length; i++)
             {
@@ -81,10 +87,11 @@ public class Goal : MonoBehaviour
         else if (collision.gameObject.CompareTag("Player") && didScore == true && isQuest == false)
 
         {
-            
+            source.PlayOneShot(playerTeleport, 0.5f);
             gM.currentLevel += 1;
             PlayerPrefs.SetInt("currentLevel", gM.currentLevel);
-            SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
+            Destroy(collision.gameObject);
+            gM.NextScene();
         }
 
 

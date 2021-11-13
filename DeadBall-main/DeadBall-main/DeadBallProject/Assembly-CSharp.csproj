@@ -66,23 +66,35 @@
     <Compile Include="Assets\Scripts\DestroyPlayer.cs" />
     <Compile Include="Assets\Scripts\TripleShooter.cs" />
     <Compile Include="Assets\Scripts\Spawner.cs" />
+    <Compile Include="Assets\MainMusic.cs" />
+    <Compile Include="Assets\Scripts\LightColors.cs" />
     <Compile Include="Assets\DontGoThroughThings.cs" />
+    <Compile Include="Assets\Destroyer.cs" />
     <Compile Include="Assets\Scripts\GameManager.cs" />
+    <Compile Include="Assets\Scripts\Enemies\SpinningEnemy.cs" />
     <Compile Include="Assets\Scripts\Enemies\EnemyShooting.cs" />
     <Compile Include="Assets\Scripts\Border.cs" />
     <Compile Include="Assets\Scripts\DelayLight.cs" />
+    <Compile Include="Assets\loseHealthImage.cs" />
     <Compile Include="Assets\Scripts\Enemies\EnemyBullet.cs" />
     <Compile Include="Assets\Scripts\Goal.cs" />
     <Compile Include="Assets\Scripts\SpecificLevelScripts\Scene4.cs" />
     <Compile Include="Assets\Scripts\Enemies\Goalkeeper.cs" />
+    <Compile Include="Assets\Move.cs" />
+    <Compile Include="Assets\DestroyOnPlayer.cs" />
+    <Compile Include="Assets\Healing.cs" />
     <Compile Include="Assets\Scripts\Randomizer.cs" />
     <Compile Include="Assets\DestroyableDoors.cs" />
     <Compile Include="Assets\Scripts\MainMenu.cs" />
+    <Compile Include="Assets\Scripts\Cover.cs" />
+    <Compile Include="Assets\SpinnerShard.cs" />
     <Compile Include="Assets\Scripts\Enemies\YellowCard.cs" />
     <Compile Include="Assets\Scripts\DestroyOnTime.cs" />
     <Compile Include="Assets\Scripts\Enemies\RedCard.cs" />
     <Compile Include="Assets\Scripts\Ball.cs" />
+    <Compile Include="Assets\Scripts\HealthBar.cs" />
     <Compile Include="Assets\Scripts\Portal.cs" />
+    <Compile Include="Assets\FindEnemy.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Assets\TextMesh Pro\Shaders\TMPro.cginc" />

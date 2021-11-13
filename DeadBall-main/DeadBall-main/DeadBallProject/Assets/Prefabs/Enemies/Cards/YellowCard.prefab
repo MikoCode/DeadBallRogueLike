@@ -105,7 +105,10 @@ MonoBehaviour:
   bc: {fileID: 9149312787088302489}
   redCard: {fileID: 1108744811313100810, guid: b1d69fe9635228741a77edeec547b72c, type: 3}
   start: 0
+  explosion: {fileID: 8372714403668429014, guid: fbb21fb1d1ef74e45909ba28cd4bb5d8, type: 3}
   areSpawned: 1
+  destroySound: {fileID: 8300000, guid: 7bef0064f8567430cac22499c6b93d4f, type: 3}
+  source: {fileID: 0}
 --- !u!61 &9149312787088302489
 BoxCollider2D:
   m_ObjectHideFlags: 0

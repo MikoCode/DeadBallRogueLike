@@ -9,30 +9,33 @@ EditorBuildSettings:
     path: Assets/Scenes/MainMenu.unity
     guid: e577acd86a69f0e40b831480ce0b5de0
   - enabled: 1
+    path: Assets/Scenes/RandomMode.unity
+    guid: a2151adb7d644d74ca452eb2310b7828
+  - enabled: 0
     path: Assets/Scenes/Level1.unity
     guid: 2cda990e2423bbf4892e6590ba056729
-  - enabled: 1
+  - enabled: 0
     path: Assets/Scenes/Level2.unity
     guid: 43b0620f47d4de0478999ba6c4d84c85
-  - enabled: 1
+  - enabled: 0
     path: Assets/Scenes/Level3.unity
     guid: 7b97bb0a5a71d8f41bbd7c6ccbc25f06
-  - enabled: 1
+  - enabled: 0
     path: Assets/Scenes/Level4.unity
     guid: 1afa9c86e39cff945a30e3e86e1598a2
-  - enabled: 1
+  - enabled: 0
     path: Assets/Scenes/Level5.unity
     guid: 7247e08bfcde8ca4b9545cf685846ae9
-  - enabled: 1
+  - enabled: 0
     path: Assets/Scenes/Level6.unity
     guid: b35715a6811101445a3e3e75df770a7b
-  - enabled: 1
+  - enabled: 0
     path: Assets/Scenes/Level7.unity
     guid: 89fc556968c108e429f46f2ada537740
-  - enabled: 1
+  - enabled: 0
     path: Assets/Scenes/Level8.unity
     guid: bca656b892d0888468d14ce89ff844b2
-  - enabled: 1
+  - enabled: 0
     path: Assets/Scenes/Level9.unity
     guid: c1725b21594397c42be7679d7cdc3104
   m_configObjects: {}

@@ -8,110 +8,200 @@ using UnityEngine.UI;
 public class GameManager : MonoBehaviour
 {
     public TextMeshProUGUI goal;
-    public TextMeshProUGUI healthText;
+    public TextMeshProUGUI[] YouDied;
+    public Button RestartButton;
+    public TextMeshProUGUI level;
+    public Transform doors;
+    public Spawner spawner;
+    public Image[] hearth;
     public int currentLevel;
-    public bool gameOn;
     public int startTime;
-    public bool goalSkip;
-    public int enemiesKilled;
-    public bool multipleQuestLevel;
     public int questsDone;
     public int requieredQuests;
-    public Transform doors;
-    public bool isBallReturning;
-    public Spawner spawner;
-    public bool spawnLate;
+    public int enemiesKilled;
     public int health;
     public int enemiesRequiered;
+    public bool gameOn;
+    public bool goalSkip;
+    public bool multipleQuestLevel;
+    public bool find;
+    public bool spawnLate;
+    public bool isBallReturning;
+    public bool MainMenu;
+    public bool gameOver;
+    public Move[] smoothTransition;
+    public GameObject audioObject, newAudioObject;
+    public int enemiesAlive;
    
+    public bool musicQuieter;
+    public bool musicLouder;
+    
+
+
     // Start is called before the first frame update
     void Start()
     {
-       
-        currentLevel = PlayerPrefs.GetInt("currentLevel");
 
-        if(currentLevel == 0)
+
+        QualitySettings.vSyncCount = 0;
+        Application.targetFrameRate = 120;
+        musicLouder = true;
+
+        
+        
+        
+
+        currentLevel = PlayerPrefs.GetInt("currentLevel");
+      
+        if (currentLevel == 1)
         {
             health = 3;
             PlayerPrefs.SetInt("GameHealth", health);
+            newAudioObject = Instantiate(audioObject, transform.position, Quaternion.identity);
+            
         }
         else
         {
-            
+            newAudioObject = GameObject.FindGameObjectWithTag("Music");
             health = PlayerPrefs.GetInt("GameHealth");
         }
+
         enemiesKilled = 0;
+
         if(goalSkip == false)
         {
             StartCoroutine("GoalText");
         }
+
         else
         {
             gameOn = true;
         }
-        healthText.text = "" + health;
+
+        if(MainMenu == false)
+        {
+            level.text = "Stage: " + currentLevel;
+        }
+        
     }
 
     // Update is called once per frame
     void Update()
     {
-        doors = GameObject.FindGameObjectWithTag("Pitch").gameObject.transform.Find("Doors");
-        if (health <= 0)
+        if(MainMenu == false)
         {
-            currentLevel = 0;
+            Gameplay();
+        }
+       
+    }
+
+
+
+  
+    
+
+    public void Gameplay()
+    {
+        if (find == false) // finding doors to another level. Cant be used at start, because it is spawned at the first frame. Function is disabled immidiatly by making find boolean true.
+        {
+            doors = GameObject.FindGameObjectWithTag("Pitch").gameObject.transform.Find("Doors");
+         
+            find = true;
+        }
+
+        if (health <= 0) // making current level at 0 after player dies.
+        {
+            currentLevel = 1;
             PlayerPrefs.SetInt("currentLevel", currentLevel);
         }
-        if (Input.GetKey(KeyCode.R))
+
+        if (Input.GetKey(KeyCode.R)) // making possible to restart, just for development
         {
+            Destroy(newAudioObject);
+            health = 0;
+            PlayerPrefs.SetInt("GameHealth", health);
             SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
-        }
-        if (Input.GetKeyDown(KeyCode.R))
-        {
-            SceneManager.LoadScene("SampleScene");
-        }
-        if(doors != null && multipleQuestLevel == true)
-        {
-            if(questsDone == requieredQuests)
-            {
-                Destroy(doors);
-            }
-        }
 
-        if(spawnLate == true && spawner!= null)
-        {
-            if(enemiesKilled >= enemiesRequiered)
-            {
-                spawner.spawn = true;
-                spawnLate = false;
-            }
         }
 
 
-        if (enemiesKilled >= spawner.enemiesSum)
+
+
+
+
+        if (enemiesAlive == 0 && enemiesKilled >= spawner.enemiesSum &&  spawner.canDestroyDoors == true)
         {
-            doors.gameObject.SetActive(false);
+            
+            musicQuieter = true;
+            spawner.StopAllCoroutines();
+            doors.gameObject.SetActive(false); // opening doors to another level after clearing level
         }
+    }
+
+   public  void GameOver()
+    {
+        
+        gameOver = true;
+        spawner.StopAllCoroutines();
+        StartCoroutine("EndText");
+
+    }
+
+
+    IEnumerator EndText()
+    {
+       
+        YouDied[0].gameObject.SetActive(true);
+        
+        yield return new WaitForSeconds(1);
+      
+        YouDied[1].gameObject.SetActive(true);
+        yield return new WaitForSeconds(1);
+       
+        
+        RestartButton.gameObject.SetActive(true);
+
+    }
+
+
+    public void Restart()
+    {
+        Destroy(newAudioObject);
+        NextScene();
+        currentLevel = 1;
+       
+
+    }
+
+    public void Healing()
+    {
+
+
+        if(health == 2)
+        {
+            hearth[2].enabled = true;
+        }
+        else if(health == 1)
+        {
+            hearth[1].enabled = true;
+        }
+        health += 1;
+        PlayerPrefs.SetInt("GameHealth", health);
+    }
+
+    public void NextScene()
+    {
+      for
+        (int i = 0; i < 2; i++)
+        {
+            
+            smoothTransition[i].timetoMove = true;
+            smoothTransition[i].timetoMove = true;
+        }
+        
+       
       
     }
 
-
-
-    IEnumerator GoalText()
-    {
-        yield return new WaitForSeconds(startTime);
-        goal.gameObject.SetActive(true);
-        yield return new WaitForSeconds(1);
-        goal.gameObject.SetActive(false);
-        yield return new WaitForSeconds(0.2f);
-        goal.gameObject.SetActive(true);
-        yield return new WaitForSeconds(0.2f);
-        goal.gameObject.SetActive(false);
-        yield return new WaitForSeconds(0.2f);
-        goal.gameObject.SetActive(true);
-        yield return new WaitForSeconds(0.2f);
-        goal.gameObject.SetActive(false);
-        gameOn = true;
-
-
-    }
+    
 }

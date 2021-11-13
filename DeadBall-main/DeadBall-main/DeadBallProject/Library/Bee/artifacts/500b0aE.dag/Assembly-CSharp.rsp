@@ -107,6 +107,7 @@
 -define:UNITY_POST_PROCESSING_STACK_V2
 -define:CSHARP_7_OR_LATER
 -define:CSHARP_7_3_OR_NEWER
+-r:"D:/DeadBall/DeadBallRogueLike/DeadBall-main/DeadBall-main/DeadBallProject/Library/PackageCache/com.unity.nuget.newtonsoft-json@2.0.0/Runtime/Newtonsoft.Json.dll"
 -r:"D:/Program Files/Unity/2021.1.16f1/Editor/Data/Managed/UnityEngine/UnityEditor.CoreModule.dll"
 -r:"D:/Program Files/Unity/2021.1.16f1/Editor/Data/Managed/UnityEngine/UnityEditor.DeviceSimulatorModule.dll"
 -r:"D:/Program Files/Unity/2021.1.16f1/Editor/Data/Managed/UnityEngine/UnityEditor.dll"
@@ -299,7 +300,6 @@
 -r:"D:/Program Files/Unity/2021.1.16f1/Editor/Data/NetStandard/Extensions/2.0.0/System.Numerics.Vectors.dll"
 -r:"D:/Program Files/Unity/2021.1.16f1/Editor/Data/NetStandard/Extensions/2.0.0/System.Runtime.InteropServices.WindowsRuntime.dll"
 -r:"D:/Program Files/Unity/2021.1.16f1/Editor/Data/NetStandard/ref/2.0.0/netstandard.dll"
--r:"D:/Projekty Unity/DeadBall-main/DeadBall-main/DeadBallProject/Library/PackageCache/com.unity.nuget.newtonsoft-json@2.0.0/Runtime/Newtonsoft.Json.dll"
 -r:"Library/Bee/artifacts/500b0aE.dag/PsdPlugin.ref.dll"
 -r:"Library/Bee/artifacts/500b0aE.dag/Unity.2D.Animation.Editor.ref.dll"
 -r:"Library/Bee/artifacts/500b0aE.dag/Unity.2D.Animation.Runtime.ref.dll"
@@ -343,9 +343,17 @@
 -r:"Library/Bee/artifacts/500b0aE.dag/UnityEditor.UI.ref.dll"
 -r:"Library/Bee/artifacts/500b0aE.dag/UnityEngine.UI.ref.dll"
 "Assets/DestroyableDoors.cs"
+"Assets/Destroyer.cs"
+"Assets/DestroyOnPlayer.cs"
 "Assets/DontGoThroughThings.cs"
+"Assets/FindEnemy.cs"
+"Assets/Healing.cs"
+"Assets/loseHealthImage.cs"
+"Assets/MainMusic.cs"
+"Assets/Move.cs"
 "Assets/Scripts/Ball.cs"
 "Assets/Scripts/Border.cs"
+"Assets/Scripts/Cover.cs"
 "Assets/Scripts/DelayLight.cs"
 "Assets/Scripts/DestroyOnTime.cs"
 "Assets/Scripts/DestroyPlayer.cs"
@@ -353,10 +361,13 @@
 "Assets/Scripts/Enemies/EnemyShooting.cs"
 "Assets/Scripts/Enemies/Goalkeeper.cs"
 "Assets/Scripts/Enemies/RedCard.cs"
+"Assets/Scripts/Enemies/SpinningEnemy.cs"
 "Assets/Scripts/Enemies/YellowCard.cs"
 "Assets/Scripts/GameManager.cs"
 "Assets/Scripts/Goal.cs"
+"Assets/Scripts/HealthBar.cs"
 "Assets/Scripts/IgnoreBall.cs"
+"Assets/Scripts/LightColors.cs"
 "Assets/Scripts/MainMenu.cs"
 "Assets/Scripts/PlayerController.cs"
 "Assets/Scripts/Portal.cs"
@@ -366,6 +377,7 @@
 "Assets/Scripts/SpecificLevelScripts/Scene6.cs"
 "Assets/Scripts/SpecificLevelScripts/Scene7.cs"
 "Assets/Scripts/TripleShooter.cs"
+"Assets/SpinnerShard.cs"
 -langversion:8.0
 
 /deterministic

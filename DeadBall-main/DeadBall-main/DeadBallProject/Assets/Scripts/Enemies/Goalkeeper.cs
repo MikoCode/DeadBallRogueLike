@@ -7,20 +7,25 @@ public class Goalkeeper : MonoBehaviour
     public Transform Ball;
     public PlayerController playerCon;
     public Goal goal;
+    private Spawner spawner;
+    public GameObject hearth;
     [SerializeField] private float speed;
     private float startPosX, startPosY;
     private bool goingBack, chosen;
-    private int direction;
+    [SerializeField] private int direction;
     public bool isVertical;
     private float offset;
+    private bool goalComponents;
     public int difficulty; // 1- Easy 2- Normal 3 - Hard
     // Start is called before the first frame update
     void Start()
     {
+        spawner = GameObject.FindGameObjectWithTag("GameManager").GetComponent<Spawner>();
+            
         startPosX = transform.position.x;
+        startPosY = transform.position.y;
         direction = 3;
-        Ball = GameObject.FindGameObjectWithTag("Ball").GetComponent<Transform>();
-        playerCon = GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerController>();
+      
         
         speed = Random.Range(6, 12);
         offset = Random.Range(-0.7f, 0.7f);
@@ -29,7 +34,16 @@ public class Goalkeeper : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-       
+       if(goalComponents == false)
+        {
+            if(Ball != null)
+            {
+                Ball = GameObject.FindGameObjectWithTag("Ball").GetComponent<Transform>();
+            }
+          
+            playerCon = GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerController>();
+            goalComponents = true;
+        }
 
 
 
@@ -51,7 +65,8 @@ public class Goalkeeper : MonoBehaviour
 
         if (goal.didScore == true)
         {
-            Destroy(gameObject);
+            Goal();
+           
         }
 
         else if (goal.didScore == false && goal.refreshGoalKeeper == true || playerCon.refreshGoalKeeper == true)
@@ -81,7 +96,7 @@ public class Goalkeeper : MonoBehaviour
 
 
 
-        if (transform.position.x <= 2.1f && transform.position.x >= -2.1f && playerCon.hasBall == false && goingBack == false && goal.didScore == false)
+        if (transform.position.x <=  startPosX + 2.1f && transform.position.x >=  startPosX -2.1f && playerCon.hasBall == false && goingBack == false && goal.didScore == false)
         {
             if (direction == 0)
             {
@@ -98,10 +113,16 @@ public class Goalkeeper : MonoBehaviour
             }
             else
             {
-                if (Vector2.Distance(new Vector2(Ball.transform.position.x, Ball.transform.position.y), new Vector2(transform.position.x, transform.position.y)) < 4 && Ball != null)
+                if(Ball != null)
                 {
-                    transform.position = Vector2.MoveTowards(transform.position, new Vector2(Ball.transform.position.x, transform.position.y), speed * Time.deltaTime);
+                    if (Vector2.Distance(new Vector2(Ball.transform.position.x, Ball.transform.position.y), new Vector2(transform.position.x, transform.position.y)) < 4)
+                    {
+                        transform.position = Vector2.MoveTowards(transform.position, new Vector2(Ball.transform.position.x, transform.position.y), speed * Time.deltaTime);
+                    }
                 }
+
+                
+             
             }
 
         }
@@ -132,7 +153,7 @@ public class Goalkeeper : MonoBehaviour
     {
         if (goal.didScore == true)
         {
-            Destroy(gameObject);
+            Goal();
         }
 
         else if (goal.didScore == false && goal.refreshGoalKeeper == true || playerCon.refreshGoalKeeper == true)
@@ -168,7 +189,7 @@ public class Goalkeeper : MonoBehaviour
             {
 
 
-                if (Vector2.Distance(new Vector2(Ball.transform.position.x, Ball.transform.position.y), new Vector2(transform.position.x, transform.position.y)) < 4 && Ball != null)
+                if ( Ball != null && Vector2.Distance(new Vector2(Ball.transform.position.x, Ball.transform.position.y), new Vector2(transform.position.x, transform.position.y)) < 4 )
                 {
                     transform.position = Vector2.MoveTowards(transform.position, new Vector2(transform.position.x, -Ball.transform.position.y), speed * Time.deltaTime);
                 }
@@ -179,7 +200,7 @@ public class Goalkeeper : MonoBehaviour
             }
             else
             {
-                if (Vector2.Distance(new Vector2(Ball.transform.position.x, Ball.transform.position.y), new Vector2(transform.position.x, transform.position.y)) < 4 && Ball != null)
+                if (Ball != null && Vector2.Distance(new Vector2(Ball.transform.position.x, Ball.transform.position.y), new Vector2(transform.position.x, transform.position.y)) < 4)
                 {
                     transform.position = Vector2.MoveTowards(transform.position, new Vector2(transform.position.x, Ball.transform.position.y), speed * Time.deltaTime) ;
                 }
@@ -207,6 +228,15 @@ public class Goalkeeper : MonoBehaviour
             transform.position = Vector2.MoveTowards(transform.position, new Vector2(transform.position.x, startPosY + offset), 3 * Time.deltaTime);
             chosen = false;
         }
+    }
+
+
+
+
+    void Goal() 
+    {
+        Instantiate(hearth, transform.position, Quaternion.identity);
+        Destroy(gameObject);
     }
 }
 

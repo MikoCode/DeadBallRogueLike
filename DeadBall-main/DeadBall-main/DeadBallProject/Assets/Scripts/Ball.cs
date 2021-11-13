@@ -4,39 +4,45 @@ using UnityEngine;
 
 public class Ball : MonoBehaviour
 {
-    public Rigidbody2D rb;
-    public PlayerController playerCon;
+    public  Rigidbody2D rb;
+    public  PlayerController playerCon;
     private CircleCollider2D box;
-    public ParticleSystem particle;
+    public  ParticleSystem wallTouch;
+    public ParticleSystem enemyTouch;
     private GameManager gM;
-    public float ballPower;
-    public bool first;
-    private float time;
+    public  float ballPower;
+    public  int hz, vt;
+    public  bool first;
+    public  bool destroyable;
+    public  bool startDynamicly;
+    public bool returning, canReturn;
     private bool didSavePos;
     private float posY;
     private float savedPosY;
-    public bool startDynamicly;
+    private float time;
     private float posX;
     private float savedPosX;
-    private bool returning;
-    public int hz, vt;
-    
+    public AudioClip hitSound;
+    public AudioSource source;
 
 
-    public bool destroyable;
+
+
+
+
     // Start is called before the first frame update
     void Start()
     {
         returning = false;
-        
+        canReturn = false;
         gM = GameObject.FindGameObjectWithTag("GameManager").GetComponent<GameManager>();
-        gM.isBallReturning = false;
-        Invoke("IsDestroyble", 0.4f);
         playerCon = GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerController>();
+        box = gameObject.GetComponent<CircleCollider2D>();
+        gM.isBallReturning = false;
         ballPower = 600; 
         time = 0.4f;
-        box = gameObject.GetComponent<CircleCollider2D>();
-      
+        Invoke("IsDestroyble", 0.05f);
+
 
     }
 
@@ -54,23 +60,8 @@ public class Ball : MonoBehaviour
 
             didSavePos = true;
         }
-        if(Input.GetKeyDown(KeyCode.Mouse1) && rb.velocity.magnitude < 4)
-        {
-            returning = true;
-            gM.isBallReturning = true;
-        }
 
-
-        if(playerCon.hasBall == false && returning == true )
-        {
-           
-            transform.position = Vector2.MoveTowards(transform.position, playerCon.transform.position, 20f * Time.deltaTime);
-            gameObject.GetComponent<SpriteRenderer>().color = new Color(1, 0, 0.125f, 0.27f);
-                
-            
-           
-        }
-
+        BallComeback();
 
         if(startDynamicly == true)
         {
@@ -79,11 +70,7 @@ public class Ball : MonoBehaviour
 
         SlowingDown();
        
-        if(returning == true)
-        {
-            
-            box.isTrigger = true;
-        }
+       
     }
 
     private void FixedUpdate()
@@ -93,11 +80,15 @@ public class Ball : MonoBehaviour
 
     private void OnCollisionEnter2D(Collision2D collision) // this happens after ball hits pitch bound
     {
+
+       
         startDynamicly = false;
         ballPower -= (rb.velocity.magnitude * 5);
         if (collision.gameObject.CompareTag("upBorder"))
         {
-            Instantiate(particle, transform.position, Quaternion.identity);
+            source.PlayOneShot(hitSound, 0.3f);
+            canReturn = true;
+            Instantiate(wallTouch, transform.position, Quaternion.identity);
             if (savedPosX <= posX)
             {
                 rb.AddForce(new Vector2(0.2f, -1) * ballPower);
@@ -112,7 +103,9 @@ public class Ball : MonoBehaviour
         }
         else if (collision.gameObject.CompareTag("downBorder"))
         {
-            Instantiate(particle, transform.position, Quaternion.identity);
+            source.PlayOneShot(hitSound, 0.3f);
+            canReturn = true;
+            Instantiate(wallTouch, transform.position, Quaternion.identity);
             if (savedPosX <=  posX)
             {
                 rb.AddForce(new Vector2(0.2f, 1) * ballPower);
@@ -129,7 +122,9 @@ public class Ball : MonoBehaviour
         }
         else if (collision.gameObject.CompareTag("leftBorder"))
         {
-            Instantiate(particle, transform.position, Quaternion.identity);
+            source.PlayOneShot(hitSound, 0.3f);
+            canReturn = true;
+            Instantiate(wallTouch, transform.position, Quaternion.identity);
             if (savedPosY <= posY)
             {
                 rb.AddForce(new Vector2(1, 0.2f) * ballPower);
@@ -146,7 +141,9 @@ public class Ball : MonoBehaviour
         }
         else if (collision.gameObject.CompareTag("rightBorder"))
         {
-            Instantiate(particle, transform.position, Quaternion.identity);
+            source.PlayOneShot(hitSound, 0.3f);
+            canReturn = true;
+            Instantiate(wallTouch, transform.position, Quaternion.identity);
             if (savedPosY <= posY)
             {
                 rb.AddForce(new Vector2(-1, 0.2f) * ballPower);
@@ -160,6 +157,13 @@ public class Ball : MonoBehaviour
             {
                 ballPower -= 150;
             }
+        }
+        else if (collision.gameObject.CompareTag("RedCard"))
+        {
+            source.PlayOneShot(hitSound, 1f);
+            ParticleSystem touch=  Instantiate(enemyTouch, collision.gameObject.transform.position, Quaternion.identity);
+            canReturn = true;
+            touch.startColor = collision.gameObject.GetComponent<SpriteRenderer>().color;
         }
         if (collision.gameObject.CompareTag("Player") && destroyable == true)
         {
@@ -175,7 +179,9 @@ public class Ball : MonoBehaviour
 
 
 
-    private void OnTriggerEnter2D(Collider2D collision)
+    
+
+    private void OnTriggerStay2D(Collider2D collision)
     {
         if (collision.gameObject.CompareTag("Player") && destroyable == true)
         {
@@ -229,4 +235,37 @@ public class Ball : MonoBehaviour
     {
         transform.Translate(new Vector2(hz,vt) * 10f * Time.deltaTime);
     }
+
+
+    void BallComeback()
+    {
+        if (Input.GetKeyDown(KeyCode.Mouse1) && canReturn == true || Input.GetKeyDown(KeyCode.Mouse1) && rb.velocity.magnitude <= 4)
+
+        {
+            returning = true;
+            gM.isBallReturning = true;
+        }
+
+
+        if (playerCon.hasBall == false && returning == true)
+        {
+
+            if(playerCon != null)
+            {
+                transform.position = Vector2.MoveTowards(transform.position, playerCon.transform.position, 20f * Time.deltaTime);
+            }
+           
+            gameObject.GetComponent<SpriteRenderer>().color = new Color(1, 0, 0.125f, 0.27f);
+
+
+
+        }
+
+
+        if (returning == true) // activating trigger while ball is coming back, so it could go through walls and enemies
+        {
+            box.isTrigger = true;
+        }
+    }
+   
 }

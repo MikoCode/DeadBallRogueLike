@@ -2,20 +2,28 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using UnityEngine.UI;
 
 public class PlayerController : MonoBehaviour
 {
     public Rigidbody2D rb;
     public GameObject ball;
-    public GameObject ballSprite;
+    public GameObject ballSprite, destroyer;
     public Transform ballPoint;
     public Camera cam;
+    public ParticleSystem[] loseHealth;
+    public ParticleSystem startingParticle;
     public bool hasBall = true, refreshGoalKeeper;
+    public SpriteRenderer sprite;
     public bool up, down, right, left;
     private bool isMoving;
     public float speed;
     public GameManager gM;
+    public Spawner spawner;
     private Vector2 movement;
+    public AudioClip shootSound;
+    public AudioSource source;
+
     private Vector2 mousePos;
     private Ball ballScript;
     public float ballSpeed;
@@ -26,9 +34,9 @@ public class PlayerController : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-
+       
         gM = GameObject.FindGameObjectWithTag("GameManager").GetComponent<GameManager>();
-        
+        StartCoroutine("PlayerStart");
         
     }
 
@@ -36,14 +44,12 @@ public class PlayerController : MonoBehaviour
     void Update()
     {
 
-        if(gM.health <= 0)
-        {
-            Destroy(gameObject);
-        }
+       
         if(camera == false)
         {
-            camera = true;
+           
             cam = GameObject.FindGameObjectWithTag("Pitch").GetComponentInChildren<Camera>();
+            camera = true;
         }
         if(isMoving == true)
         {
@@ -113,7 +119,7 @@ public class PlayerController : MonoBehaviour
 
             if (Input.GetKeyDown(KeyCode.Space) || Input.GetKeyDown(KeyCode.Mouse0))
             {
-              
+                source.PlayOneShot(shootSound, 0.4f);
                 GameObject projectile =  Instantiate(ball, ballPoint.position, ballPoint.rotation);
                 Rigidbody2D rb = projectile.GetComponent<Rigidbody2D>();
                 rb.AddForce(ballPoint.up * ballSpeed, ForceMode2D.Impulse);
@@ -138,22 +144,39 @@ public class PlayerController : MonoBehaviour
     {
         if (collision.gameObject.CompareTag("RedCard"))
         {
-            gM.health -= 1;
-            gM.healthText.text = "" + gM.health;
+            LoseHealth();
+
             PlayerPrefs.SetInt("GameHealth", gM.health);
         }
+        else if (collision.gameObject.CompareTag("Spike"))
+        {
+            LoseHealth();
+
+            PlayerPrefs.SetInt("GameHealth", gM.health);
+        }
+
     }
-
-
     private void OnTriggerEnter2D(Collider2D collision)
     {
         if (collision.gameObject.CompareTag("Card"))
         {
-            gM.health -= 1;
-            gM.healthText.text = "" + gM.health;
+            LoseHealth();
+         
             PlayerPrefs.SetInt("GameHealth", gM.health);
+            gM.enemiesAlive -= 1;
             gM.enemiesKilled += 1;
             Destroy(collision.gameObject);
+        }
+        else if (collision.gameObject.CompareTag("Bullet"))
+        {
+
+
+            LoseHealth();
+            
+                PlayerPrefs.SetInt("GameHealth", gM.health);
+                gM.enemiesKilled += 1;
+                Destroy(collision.gameObject);
+            
         }
     }
 
@@ -161,7 +184,52 @@ public class PlayerController : MonoBehaviour
 
 
 
+    void LoseHealth()
+    {
+        if(gM.health == 3)
+        {
+           gM.hearth[2].enabled = false;
+            LoseHealthImage();
+            Instantiate(loseHealth[0], transform.position, Quaternion.identity);
+
+        }
+        else if(gM.health == 2)
+        {
+            gM.hearth[1].enabled = false;
+            LoseHealthImage();
+            Instantiate(loseHealth[0], transform.position, Quaternion.identity);
+
+        }
+
+        else if(gM.health == 1)
+        {
+            gM.hearth[0].enabled = false;
+
+            
+            gM.GameOver();
+            Instantiate(loseHealth[1], transform.position, Quaternion.identity);
+            Instantiate(destroyer, transform.position, Quaternion.identity);
+            Destroy(gameObject);
+            
+
+        }
+
+        gM.health -= 1;
+        
+    }
+  void LoseHealthImage()
+    {
+        gM.hearth[3].gameObject.SetActive(true);
+        gM.hearth[3].GetComponent<loseHealthImage>().transparency = 0.2f;
+    }
 
 
+    IEnumerator PlayerStart()
+    {
+       
+        yield return new WaitForSeconds(1f);
+        
+        sprite.enabled = true;
+    }
 
 }
