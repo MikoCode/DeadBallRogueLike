@@ -5,7 +5,7 @@ using UnityEngine.SceneManagement;
 
 public class Move : MonoBehaviour
 {
-    public bool isLeft, timetoMove, chosenOne;
+    public bool isLeft, timetoMove, chosenOne, vertical;
     // Start is called before the first frame update
     void Start()
     {
@@ -19,7 +19,15 @@ public class Move : MonoBehaviour
         {
             if(timetoMove== true)
             {
-                transform.Translate(Vector2.left * Time.deltaTime * 1100);
+                if(vertical == false)
+                {
+                    transform.Translate(Vector2.left * Time.deltaTime * 1100);
+                }
+                else
+                {
+                    transform.Translate(Vector2.up * Time.deltaTime * 1100);
+                }
+                
             }
          
         }
@@ -27,9 +35,18 @@ public class Move : MonoBehaviour
         {
             if (timetoMove == true)
             {
-                transform.Translate(Vector2.right * Time.deltaTime * 1100);
+                if(vertical == false)
+                {
+                    transform.Translate(Vector2.right * Time.deltaTime * 900);
+                }
+                else
+                {
+                    transform.Translate(Vector2.down * Time.deltaTime * 900);
+                }
+              
             }
-            
+           
+
         }
 
 

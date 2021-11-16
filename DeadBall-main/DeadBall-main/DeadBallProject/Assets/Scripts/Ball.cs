@@ -165,6 +165,16 @@ public class Ball : MonoBehaviour
             canReturn = true;
             touch.startColor = collision.gameObject.GetComponent<SpriteRenderer>().color;
         }
+
+        else if (collision.gameObject.CompareTag("Goalkeeper"))
+        {
+            source.PlayOneShot(hitSound, 1f);
+            ParticleSystem touch = Instantiate(enemyTouch, collision.gameObject.transform.position, Quaternion.identity);
+            touch.startColor = collision.gameObject.GetComponent<SpriteRenderer>().color;
+            canReturn = true;
+        }
+
+
         if (collision.gameObject.CompareTag("Player") && destroyable == true)
         {
             playerCon.hasBall = true;

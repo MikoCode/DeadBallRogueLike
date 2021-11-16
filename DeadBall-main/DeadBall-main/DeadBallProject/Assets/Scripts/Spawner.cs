@@ -183,17 +183,17 @@ public class Spawner : MonoBehaviour
 
     void SpawnerSize()
     {
-        if (rand.place == 0)
+        if (rand.place < 4)
         {
             center = new Vector2(-1.3f, -4.45f);
             size = new Vector2(12.3f, 16.5f);
         }
-        else if (rand.place == 1)
+        else if (rand.place == 4)
         {
             center = new Vector2(-5.6f, -4.76f);
             size = new Vector2(17f, 16.5f);
         }
-        else if (rand.place == 2)
+        else if (rand.place > 1)
         {
             center = new Vector2(-0.7f, -5.72f);
             size = new Vector2(17.12f, 15.78f);

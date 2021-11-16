@@ -21,7 +21,7 @@ public class PlayerController : MonoBehaviour
     public GameManager gM;
     public Spawner spawner;
     private Vector2 movement;
-    public AudioClip shootSound;
+    public AudioClip shootSound, damageSound;
     public AudioSource source;
 
     private Vector2 mousePos;
@@ -186,6 +186,7 @@ public class PlayerController : MonoBehaviour
 
     void LoseHealth()
     {
+        source.PlayOneShot(damageSound, 0.3f);
         if(gM.health == 3)
         {
            gM.hearth[2].enabled = false;

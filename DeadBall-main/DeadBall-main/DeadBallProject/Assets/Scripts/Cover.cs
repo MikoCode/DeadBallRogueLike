@@ -37,7 +37,7 @@ public class Cover : MonoBehaviour
                 if (hp <= 0)
                 {
                     Instantiate(explosion, gameObject.transform.position, Quaternion.identity);
-                    Destroy(gameObject,0.1f);
+                    Destroy(gameObject);
                 }
             }
 
@@ -45,12 +45,14 @@ public class Cover : MonoBehaviour
         }
         else if (collision.gameObject.CompareTag("Bullet"))
         {
+            Destroy(collision.gameObject);
             hp -= 2;
             if (hp <= 0)
             {
                 Instantiate(explosion, gameObject.transform.position, Quaternion.identity);
-                Destroy(gameObject,0.1f);
+                Destroy(gameObject);
             }
+            
         }
     }
 }

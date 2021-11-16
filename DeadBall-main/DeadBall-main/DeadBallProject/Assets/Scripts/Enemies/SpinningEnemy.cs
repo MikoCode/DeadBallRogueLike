@@ -7,11 +7,15 @@ public class SpinningEnemy : MonoBehaviour
     private Transform playerCon;
     private Vector2 newPos;
     private GameManager gM;
-    public ParticleSystem particle;
+    public ParticleSystem particleSmall;
+    public ParticleSystem particleBig;
     public float health;
     private bool start;
     public float speed;
     public bool areSpawned;
+    public AudioSource source;
+    public AudioClip destroyShard;
+    public AudioClip destroySpinner;
     // Start is called before the first frame update
     void Start()
     {
@@ -21,6 +25,7 @@ public class SpinningEnemy : MonoBehaviour
         }
         health = 3;
         gM = GameObject.FindGameObjectWithTag("GameManager").GetComponent<GameManager>();
+        source = GameObject.FindGameObjectWithTag("GameManager").GetComponent<AudioSource>();
         gM.enemiesAlive += 1;
         InvokeRepeating("GetPlayerPos", 1f, Random.Range(3, 6));
         playerCon = GameObject.FindGameObjectWithTag("Player").transform;

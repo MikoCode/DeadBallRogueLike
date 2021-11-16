@@ -656,6 +656,9 @@ MonoBehaviour:
   - {fileID: 957511887}
   audioObject: {fileID: 8027886304943561862, guid: 35ac2d4d804298e4885d012fa03fa357, type: 3}
   newAudioObject: {fileID: 0}
+  enemiesAlive: 0
+  musicQuieter: 0
+  musicLouder: 0
 --- !u!4 &740222566
 Transform:
   m_ObjectHideFlags: 0
@@ -720,8 +723,14 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   pitch:
+  - {fileID: 8308928566735460860, guid: 7d0898c3983e27f40912e20e3b491ee1, type: 3}
+  - {fileID: 3029757761373712002, guid: f4033f3d5d05ca14990e3f68c57a1dce, type: 3}
   - {fileID: 5067081080217643911, guid: e3acda04d5c9c7d40a2ada78c98df630, type: 3}
+  - {fileID: 5635111703631296585, guid: 9322eef47cd259c499b5aef624d5f599, type: 3}
   - {fileID: 7569892625171333438, guid: c594f037bd386304a960975054728534, type: 3}
+  - {fileID: 6410843710385640363, guid: 2ec765c22699494409f111c326e21c31, type: 3}
+  - {fileID: 3315146333606102629, guid: cd268d9e75240284492dab29790c4c9d, type: 3}
+  - {fileID: 619502648004059560, guid: 85ffcac364cc9ae4da08ff9162957376, type: 3}
   - {fileID: 1811482357467387117, guid: 7492ae132f67c8c4da22dbee84ce3098, type: 3}
   place: 0
   covers: 0
@@ -883,6 +892,7 @@ MonoBehaviour:
   isLeft: 1
   timetoMove: 0
   chosenOne: 0
+  vertical: 0
 --- !u!114 &957511888
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1114,6 +1124,7 @@ MonoBehaviour:
   isLeft: 1
   timetoMove: 1
   chosenOne: 0
+  vertical: 0
 --- !u!114 &1264417542
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1220,6 +1231,7 @@ MonoBehaviour:
   isLeft: 0
   timetoMove: 0
   chosenOne: 1
+  vertical: 0
 --- !u!114 &1314467450
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1875,6 +1887,7 @@ MonoBehaviour:
   isLeft: 0
   timetoMove: 1
   chosenOne: 0
+  vertical: 0
 --- !u!114 &1915862677
 MonoBehaviour:
   m_ObjectHideFlags: 0

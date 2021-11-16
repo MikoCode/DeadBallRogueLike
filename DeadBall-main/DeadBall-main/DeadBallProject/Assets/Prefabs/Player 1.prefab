@@ -122,6 +122,7 @@ MonoBehaviour:
   gM: {fileID: 0}
   spawner: {fileID: 0}
   shootSound: {fileID: 8300000, guid: 2c5292ba5cf254919a6b9e2b18e04f49, type: 3}
+  damageSound: {fileID: 8300000, guid: 7e9ee6dc04a5d40d1a5dfc4beb9865e7, type: 3}
   source: {fileID: 4390146768920439860}
   ballSpeed: 0
   time: 1

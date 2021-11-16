@@ -93,8 +93,10 @@
     <Compile Include="Assets\Scripts\Enemies\RedCard.cs" />
     <Compile Include="Assets\Scripts\Ball.cs" />
     <Compile Include="Assets\Scripts\HealthBar.cs" />
-    <Compile Include="Assets\Scripts\Portal.cs" />
     <Compile Include="Assets\FindEnemy.cs" />
+    <Compile Include="Assets\Scripts\Portal.cs" />
+    <Compile Include="Assets\NeonShapes\SelfDestroyScript.cs" />
+    <Compile Include="Assets\Scripts\LighintNeon.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Assets\TextMesh Pro\Shaders\TMPro.cginc" />

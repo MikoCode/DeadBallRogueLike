@@ -17,6 +17,8 @@ public class Goalkeeper : MonoBehaviour
     private float offset;
     private bool goalComponents;
     public int difficulty; // 1- Easy 2- Normal 3 - Hard
+    private AudioSource source;
+    public AudioClip defend;
     // Start is called before the first frame update
     void Start()
     {
@@ -29,6 +31,8 @@ public class Goalkeeper : MonoBehaviour
         
         speed = Random.Range(6, 12);
         offset = Random.Range(-0.7f, 0.7f);
+        
+        source = GameObject.FindGameObjectWithTag("GameManager").GetComponent<AudioSource>();
     }
 
     // Update is called once per frame
@@ -230,6 +234,13 @@ public class Goalkeeper : MonoBehaviour
         }
     }
 
+    private void OnCollisionEnter2D(Collision2D collision)
+    {
+        if (collision.gameObject.CompareTag("Ball"))
+        {
+
+        }
+    }
 
 
 

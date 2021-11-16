@@ -110,6 +110,7 @@ MonoBehaviour:
   direction: 0
   isVertical: 0
   difficulty: 0
+  defend: {fileID: 0}
 --- !u!61 &5690891074744732793
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -119,7 +120,7 @@ BoxCollider2D:
   m_GameObject: {fileID: 2387012585589659228}
   m_Enabled: 1
   m_Density: 1
-  m_Material: {fileID: 0}
+  m_Material: {fileID: 6200000, guid: b064a5995a2860244a1fe94f1f8579e2, type: 2}
   m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0

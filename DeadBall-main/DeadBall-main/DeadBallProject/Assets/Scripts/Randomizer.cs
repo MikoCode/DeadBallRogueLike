@@ -15,7 +15,7 @@ public class Randomizer : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-            place = Random.Range(0, 3);
+            place = Random.Range(0, 9);
 
 
         if(gM.currentLevel == 1)

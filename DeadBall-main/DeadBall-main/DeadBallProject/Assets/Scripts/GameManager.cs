@@ -129,7 +129,7 @@ public class GameManager : MonoBehaviour
 
 
 
-        if (enemiesAlive == 0 && enemiesKilled >= spawner.enemiesSum &&  spawner.canDestroyDoors == true)
+        if (enemiesAlive <= 0 && enemiesKilled >= spawner.enemiesSum &&  spawner.canDestroyDoors == true)
         {
             
             musicQuieter = true;

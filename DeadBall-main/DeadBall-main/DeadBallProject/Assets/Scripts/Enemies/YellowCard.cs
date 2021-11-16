@@ -66,10 +66,10 @@ public class YellowCard : MonoBehaviour
                     
                     Instantiate(redCard, collision.gameObject.transform.position, Quaternion.identity);
                 }
-               
-               
-                Destroy(gameObject, 0.1f);
+
                 isRed = true;
+                Destroy(gameObject);
+               
                 
             }
             
@@ -87,7 +87,7 @@ public class YellowCard : MonoBehaviour
                 gM.enemiesAlive -= 1;
                 gM.enemiesKilled += 1;
                 Instantiate(explosion, transform.position, Quaternion.identity);
-                Destroy(gameObject,0.1f);
+                Destroy(gameObject);
             }
         }
         
