@@ -24,6 +24,9 @@ TagManager:
   - Smooth
   - Music
   - Pen
+  - MovingNeon
+  - StopLight
+  - StartLight
   layers:
   - Default
   - TransparentFX

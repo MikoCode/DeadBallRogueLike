@@ -20,8 +20,8 @@ public class LightColors : MonoBehaviour
 
         light1.color = new Color(colors[c1].r, colors[c1].g, colors[c1].b);
         light2.color = new Color(colors[c2].r, colors[c2].g, colors[c2].b);
-        light1.intensity = 2.5f;
-        light2.intensity = 2.5f;
+        light1.intensity = 1.8f;
+        light2.intensity = 2f;
     }
 
     // Update is called once per frame

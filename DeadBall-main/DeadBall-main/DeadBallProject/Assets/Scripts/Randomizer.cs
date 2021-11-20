@@ -8,14 +8,25 @@ public class Randomizer : MonoBehaviour
     public GameObject[] pitch;
     public int place, covers, enemies, waves;
     public bool blockades;
-    public bool isGoalkeeper;
+    public bool isGoalkeeper, horizontalType;
     public Spawner spawner;
     public GameManager gM;
     public int goalkeeperLevel;
     // Start is called before the first frame update
     void Start()
     {
-            place = Random.Range(0, 9);
+
+        place = Random.Range(0, 12);
+
+        if (place == 2 || place == 3 || place == 4 || place == 5 || place == 9 || place == 10)
+        {
+            horizontalType = true;
+        }
+        else
+        {
+            horizontalType = false;
+        }
+        
 
 
         if(gM.currentLevel == 1)
@@ -48,9 +59,6 @@ public class Randomizer : MonoBehaviour
         }
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
+   
+   
 }

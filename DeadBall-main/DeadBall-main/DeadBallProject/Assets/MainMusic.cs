@@ -49,7 +49,7 @@ public class MainMusic : MonoBehaviour
         {
 
             time -= 1 * Time.deltaTime;
-            if (time < 0 && audioSource.volume > 0.1f)
+            if (time < 0 && audioSource.volume > 0.2f)
             {
                 
                 

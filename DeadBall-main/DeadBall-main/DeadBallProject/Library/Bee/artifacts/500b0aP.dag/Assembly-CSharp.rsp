@@ -304,6 +304,7 @@
 "Assets/loseHealthImage.cs"
 "Assets/MainMusic.cs"
 "Assets/Move.cs"
+"Assets/NeonShapes/SelfDestroyScript.cs"
 "Assets/Scripts/Ball.cs"
 "Assets/Scripts/Border.cs"
 "Assets/Scripts/Cover.cs"
@@ -320,8 +321,10 @@
 "Assets/Scripts/Goal.cs"
 "Assets/Scripts/HealthBar.cs"
 "Assets/Scripts/IgnoreBall.cs"
+"Assets/Scripts/LighintNeon.cs"
 "Assets/Scripts/LightColors.cs"
 "Assets/Scripts/MainMenu.cs"
+"Assets/Scripts/MovingNeon.cs"
 "Assets/Scripts/PlayerController.cs"
 "Assets/Scripts/Portal.cs"
 "Assets/Scripts/Randomizer.cs"
@@ -331,6 +334,7 @@
 "Assets/Scripts/SpecificLevelScripts/Scene7.cs"
 "Assets/Scripts/TripleShooter.cs"
 "Assets/SpinnerShard.cs"
+"Assets/StopLight.cs"
 -langversion:8.0
 
 /deterministic

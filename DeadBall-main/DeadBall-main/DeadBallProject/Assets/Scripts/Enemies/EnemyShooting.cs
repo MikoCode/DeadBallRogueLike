@@ -14,7 +14,7 @@ public class EnemyShooting : MonoBehaviour
     [Range(1,2)]
     public int mode; // 1 - slow, 2 - fast, 3 - multiple;
     private float curTimeBtwShoots;
-    private bool startShooting, shooting, series;
+    private bool startShooting, shooting, series, isShaking;
     public float whenToShoot;
     public ParticleSystem destroyParticle;
     public float speed;
@@ -23,6 +23,9 @@ public class EnemyShooting : MonoBehaviour
     public bool areSpawned;
     public AudioClip destroySound;
     private AudioSource source;
+  
+    public float amount;
+    private Vector3 OriginalPos;
 
     // Start is called before the first frame update
     void Start()
@@ -50,7 +53,13 @@ public class EnemyShooting : MonoBehaviour
     {   
         Shoot();
         Moving();
-
+        if (isShaking)
+        {
+            Vector3 newPos =  OriginalPos + Random.insideUnitSphere * (Time.deltaTime * amount);
+            
+            newPos.z = transform.position.z;
+            transform.position = newPos;
+        }
          
     }
 
@@ -60,6 +69,8 @@ public class EnemyShooting : MonoBehaviour
         if (collision.gameObject.CompareTag("Ball"))
         {
             health -= 1;
+            startTimeBtwShoots -= 0.1f;
+            StartCoroutine("Shake");
             if (health <= 0)
             {
                 gM.enemiesAlive -= 1;
@@ -184,5 +195,19 @@ public class EnemyShooting : MonoBehaviour
         gameObject.SetActive(true);
     }
 
+    public IEnumerator Shake()
+    {
+        OriginalPos = transform.position;
+
+        if(isShaking == false)
+        {
+            isShaking = true;
+        }
+
+        yield return new WaitForSeconds(0.25f);
+        isShaking = false;
+        transform.position = OriginalPos;
+    }
+    
    
 }

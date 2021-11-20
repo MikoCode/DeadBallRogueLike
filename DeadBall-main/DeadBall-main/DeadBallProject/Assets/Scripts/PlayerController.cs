@@ -12,7 +12,7 @@ public class PlayerController : MonoBehaviour
     public Transform ballPoint;
     public Camera cam;
     public ParticleSystem[] loseHealth;
-    public ParticleSystem startingParticle;
+    public ParticleSystem startingParticle, ballShootParticle;
     public bool hasBall = true, refreshGoalKeeper;
     public SpriteRenderer sprite;
     public bool up, down, right, left;
@@ -23,7 +23,7 @@ public class PlayerController : MonoBehaviour
     private Vector2 movement;
     public AudioClip shootSound, damageSound;
     public AudioSource source;
-
+   
     private Vector2 mousePos;
     private Ball ballScript;
     public float ballSpeed;
@@ -114,12 +114,14 @@ public class PlayerController : MonoBehaviour
         if (hasBall == true ) // naprawiæ, dzia³¹ tylko gdy jest bramkarz
 
         {
+            
             ballSprite.gameObject.SetActive(true);
             
 
             if (Input.GetKeyDown(KeyCode.Space) || Input.GetKeyDown(KeyCode.Mouse0))
             {
                 source.PlayOneShot(shootSound, 0.4f);
+                ballShootParticle.Play();
                 GameObject projectile =  Instantiate(ball, ballPoint.position, ballPoint.rotation);
                 Rigidbody2D rb = projectile.GetComponent<Rigidbody2D>();
                 rb.AddForce(ballPoint.up * ballSpeed, ForceMode2D.Impulse);

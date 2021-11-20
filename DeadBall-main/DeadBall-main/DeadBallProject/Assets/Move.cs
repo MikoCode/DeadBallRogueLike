@@ -5,7 +5,7 @@ using UnityEngine.SceneManagement;
 
 public class Move : MonoBehaviour
 {
-    public bool isLeft, timetoMove, chosenOne, vertical;
+    public bool isLeft, timetoMove, chosenOne, vertical, mainMenu;
     // Start is called before the first frame update
     void Start()
     {
@@ -21,11 +21,11 @@ public class Move : MonoBehaviour
             {
                 if(vertical == false)
                 {
-                    transform.Translate(Vector2.left * Time.deltaTime * 1100);
+                    transform.Translate(Vector2.left * Time.deltaTime * 1250);
                 }
                 else
                 {
-                    transform.Translate(Vector2.up * Time.deltaTime * 1100);
+                    transform.Translate(Vector2.up * Time.deltaTime * 1250);
                 }
                 
             }
@@ -37,11 +37,11 @@ public class Move : MonoBehaviour
             {
                 if(vertical == false)
                 {
-                    transform.Translate(Vector2.right * Time.deltaTime * 900);
+                    transform.Translate(Vector2.right * Time.deltaTime * 1250);
                 }
                 else
                 {
-                    transform.Translate(Vector2.down * Time.deltaTime * 900);
+                    transform.Translate(Vector2.down * Time.deltaTime * 1250);
                 }
               
             }
@@ -58,7 +58,16 @@ public class Move : MonoBehaviour
     {
         if (collision.gameObject.CompareTag("Smooth") && chosenOne == true)
         {
-            SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
+            if(mainMenu == false)
+            {
+                SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
+            }
+            else
+            {
+                SceneManager.LoadScene(1);
+            }
+            
         }
+        
     }
 }

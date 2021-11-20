@@ -11,6 +11,9 @@ public class RedCard : MonoBehaviour
     [SerializeField] private int health = 3;
     public AudioClip destroySound;
     private AudioSource source;
+    public float amount;
+    private Vector3 OriginalPos;
+    private bool isShaking;
     // Start is called before the first frame update
     void Start()
     {
@@ -28,7 +31,14 @@ public class RedCard : MonoBehaviour
         {
             transform.position = Vector2.MoveTowards(transform.position, new Vector2(Player.transform.position.x, Player.transform.position.y), speed * Time.deltaTime);
         }
-        
+
+        if (isShaking)
+        {
+            Vector3 newPos = OriginalPos + Random.insideUnitSphere * (Time.deltaTime * amount);
+
+            newPos.z = transform.position.z;
+            transform.position = newPos;
+        }
     }
 
 
@@ -37,6 +47,8 @@ public class RedCard : MonoBehaviour
         if (collision.gameObject.CompareTag("Ball"))
         {
             health -= 1;
+            speed += 0.7f;
+            StartCoroutine("Shake");
             if (health <= 0)
             {
 
@@ -44,7 +56,7 @@ public class RedCard : MonoBehaviour
                 gM.enemiesAlive -= 1;
                 gM.enemiesKilled += 2;
                 Instantiate(destroyParticle, transform.position, Quaternion.identity);
-                Destroy(gameObject,0.1f);
+                Destroy(gameObject);
             }
         }
        
@@ -58,5 +70,17 @@ public class RedCard : MonoBehaviour
 
     }
 
-    
+    public IEnumerator Shake()
+    {
+        OriginalPos = transform.position;
+
+        if (isShaking == false)
+        {
+            isShaking = true;
+        }
+
+        yield return new WaitForSeconds(0.25f);
+        isShaking = false;
+        transform.position = OriginalPos;
+    }
 }

@@ -23,6 +23,7 @@ public class Spawner : MonoBehaviour
     private int howManySpinners, howManyShooters;
     private int waveCooldown;
     public bool canDestroyDoors;
+    private int pitchType;
     [SerializeField] private int waves;
 
     // Start is called before the first frame update
@@ -185,16 +186,19 @@ public class Spawner : MonoBehaviour
     {
         if (rand.place < 4)
         {
+            pitchType = 1;
             center = new Vector2(-1.3f, -4.45f);
             size = new Vector2(12.3f, 16.5f);
         }
-        else if (rand.place == 4)
+        else if (rand.place > 3 && rand.place < 8)
         {
+            pitchType = 2;
             center = new Vector2(-5.6f, -4.76f);
             size = new Vector2(17f, 16.5f);
         }
-        else if (rand.place > 1)
+        else 
         {
+            pitchType = 3;
             center = new Vector2(-0.7f, -5.72f);
             size = new Vector2(17.12f, 15.78f);
         }
@@ -213,13 +217,13 @@ public class Spawner : MonoBehaviour
             for (int j = 0; j <= rand.covers; j++)
             {
 
-                if (rand.place == 0 || rand.place == 1)
+                if (rand.horizontalType == true)
                 {
                     Instantiate(covers[0], pos, Quaternion.identity);
                     pos += new Vector2(Random.Range(2, 6), Random.Range(2, 6));
                 }
 
-                else
+                else if (rand.horizontalType == false)
                 {
                     Instantiate(covers[1], pos, Quaternion.Euler(0, 0, 90));
                     pos += new Vector2(Random.Range(2, 6), Random.Range(2, 6));

@@ -338,6 +338,7 @@ MonoBehaviour:
   direction: 0
   isVertical: 1
   difficulty: 2
+  shake: {fileID: 0}
   defend: {fileID: 0}
 --- !u!61 &-4383294095563453069
 BoxCollider2D:

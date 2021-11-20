@@ -67,6 +67,7 @@
     <Compile Include="Assets\Scripts\TripleShooter.cs" />
     <Compile Include="Assets\Scripts\Spawner.cs" />
     <Compile Include="Assets\MainMusic.cs" />
+    <Compile Include="Assets\NeonShapes\SelfDestroyScript.cs" />
     <Compile Include="Assets\Scripts\LightColors.cs" />
     <Compile Include="Assets\DontGoThroughThings.cs" />
     <Compile Include="Assets\Destroyer.cs" />
@@ -74,8 +75,10 @@
     <Compile Include="Assets\Scripts\Enemies\SpinningEnemy.cs" />
     <Compile Include="Assets\Scripts\Enemies\EnemyShooting.cs" />
     <Compile Include="Assets\Scripts\Border.cs" />
+    <Compile Include="Assets\Scripts\MovingNeon.cs" />
     <Compile Include="Assets\Scripts\DelayLight.cs" />
     <Compile Include="Assets\loseHealthImage.cs" />
+    <Compile Include="Assets\Scripts\LighintNeon.cs" />
     <Compile Include="Assets\Scripts\Enemies\EnemyBullet.cs" />
     <Compile Include="Assets\Scripts\Goal.cs" />
     <Compile Include="Assets\Scripts\SpecificLevelScripts\Scene4.cs" />
@@ -94,9 +97,8 @@
     <Compile Include="Assets\Scripts\Ball.cs" />
     <Compile Include="Assets\Scripts\HealthBar.cs" />
     <Compile Include="Assets\FindEnemy.cs" />
+    <Compile Include="Assets\StopLight.cs" />
     <Compile Include="Assets\Scripts\Portal.cs" />
-    <Compile Include="Assets\NeonShapes\SelfDestroyScript.cs" />
-    <Compile Include="Assets\Scripts\LighintNeon.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Assets\TextMesh Pro\Shaders\TMPro.cginc" />

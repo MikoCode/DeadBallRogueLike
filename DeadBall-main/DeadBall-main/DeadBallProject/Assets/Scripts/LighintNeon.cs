@@ -7,11 +7,12 @@ public class LighintNeon : MonoBehaviour
 {
     public Light2D light;
     public float min, max;
+    public bool goalNeon;
     // Start is called before the first frame update
     void Start()
     {
-        light.color = new Color(Random.value, Random.value, Random.value);
-        InvokeRepeating("ChangeColor", Random.Range(0.4f, 3.1f), Random.Range(3.8f, 5.6f));
+        ChangeColor();
+       
     }
 
     // Update is called once per frame
@@ -22,6 +23,11 @@ public class LighintNeon : MonoBehaviour
 
     public void ChangeColor()
     {
-        light.color = new Color(Random.value, Random.value, Random.value);
+        if(goalNeon == false)
+        {
+            light.color = new Color(Random.value, Random.value, Random.value);
+        }
+       
+       
     }
 }

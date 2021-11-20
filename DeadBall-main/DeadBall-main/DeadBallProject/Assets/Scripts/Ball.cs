@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Experimental.Rendering.Universal;
 
 public class Ball : MonoBehaviour
 {
@@ -24,6 +25,7 @@ public class Ball : MonoBehaviour
     private float savedPosX;
     public AudioClip hitSound;
     public AudioSource source;
+    public Light2D light;
 
 
 
@@ -264,7 +266,7 @@ public class Ball : MonoBehaviour
             {
                 transform.position = Vector2.MoveTowards(transform.position, playerCon.transform.position, 20f * Time.deltaTime);
             }
-           
+           light.color = new Color(1, 0, 0.125f, 0.27f);
             gameObject.GetComponent<SpriteRenderer>().color = new Color(1, 0, 0.125f, 0.27f);
 
 

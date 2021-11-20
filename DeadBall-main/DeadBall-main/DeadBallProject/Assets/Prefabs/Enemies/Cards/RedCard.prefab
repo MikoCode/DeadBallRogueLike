@@ -149,6 +149,8 @@ MonoBehaviour:
   destroyParticle: {fileID: 7856131419282183252, guid: 5900c00c09afb4f4284959e89a8e39b0, type: 3}
   health: 3
   destroySound: {fileID: 8300000, guid: 7bef0064f8567430cac22499c6b93d4f, type: 3}
+  amount: 10
+  OriginalPos: {x: 0, y: 0, z: 0}
 --- !u!1 &5512220449512147858
 GameObject:
   m_ObjectHideFlags: 0

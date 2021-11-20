@@ -5,6 +5,7 @@ using UnityEngine.SceneManagement;
 
 public class MainMenu : MonoBehaviour
 {
+    public Move[] smoothTransition;
     // Start is called before the first frame update
     void Start()
     {
@@ -19,8 +20,15 @@ public class MainMenu : MonoBehaviour
 
     public void StartLevel1()
     {
-        Debug.Log("LOAD");
-        SceneManager.LoadScene(1);
+
+        for
+       (int i = 0; i < 2; i++)
+        {
+
+            smoothTransition[i].timetoMove = true;
+            smoothTransition[i].timetoMove = true;
+        }
        
-;    }
+       
+;   }
 }
