@@ -6,10 +6,18 @@ using UnityEngine.SceneManagement;
 public class Move : MonoBehaviour
 {
     public bool isLeft, timetoMove, chosenOne, vertical, mainMenu;
+    private float speed;
     // Start is called before the first frame update
     void Start()
     {
-        
+        if(mainMenu == true)
+        {
+            speed = 25;
+        }
+        else
+        {
+            speed = 1250;
+        }
     }
 
     // Update is called once per frame
@@ -21,11 +29,11 @@ public class Move : MonoBehaviour
             {
                 if(vertical == false)
                 {
-                    transform.Translate(Vector2.left * Time.deltaTime * 1250);
+                    transform.Translate(Vector2.left * Time.deltaTime * speed);
                 }
                 else
                 {
-                    transform.Translate(Vector2.up * Time.deltaTime * 1250);
+                    transform.Translate(Vector2.up * Time.deltaTime * speed);
                 }
                 
             }
@@ -37,11 +45,11 @@ public class Move : MonoBehaviour
             {
                 if(vertical == false)
                 {
-                    transform.Translate(Vector2.right * Time.deltaTime * 1250);
+                    transform.Translate(Vector2.right * Time.deltaTime * speed);
                 }
                 else
                 {
-                    transform.Translate(Vector2.down * Time.deltaTime * 1250);
+                    transform.Translate(Vector2.down * Time.deltaTime * speed);
                 }
               
             }

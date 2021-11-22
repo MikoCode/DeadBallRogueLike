@@ -19,7 +19,7 @@ MonoBehaviour:
     m_Value: 0
   intensity:
     m_OverrideState: 1
-    m_Value: 0.536
+    m_Value: 1
     min: 0
     max: 1
   response:
@@ -30,6 +30,91 @@ MonoBehaviour:
   texture:
     m_OverrideState: 0
     m_Value: {fileID: 0}
+--- !u!114 &-5645485413182130134
+MonoBehaviour:
+  m_ObjectHideFlags: 3
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 221518ef91623a7438a71fef23660601, type: 3}
+  m_Name: WhiteBalance
+  m_EditorClassIdentifier: 
+  active: 1
+  m_AdvancedMode: 0
+  temperature:
+    m_OverrideState: 0
+    m_Value: 0
+    min: -100
+    max: 100
+  tint:
+    m_OverrideState: 0
+    m_Value: 0
+    min: -100
+    max: 100
+--- !u!114 &-3762771763759940918
+MonoBehaviour:
+  m_ObjectHideFlags: 3
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5485954d14dfb9a4c8ead8edb0ded5b1, type: 3}
+  m_Name: LiftGammaGain
+  m_EditorClassIdentifier: 
+  active: 1
+  m_AdvancedMode: 0
+  lift:
+    m_OverrideState: 0
+    m_Value: {x: 1, y: 1, z: 1, w: 0}
+  gamma:
+    m_OverrideState: 1
+    m_Value: {x: 1, y: 1, z: 1, w: -0.089686096}
+  gain:
+    m_OverrideState: 0
+    m_Value: {x: 1, y: 1, z: 1, w: 0}
+--- !u!114 &-3567209807237928385
+MonoBehaviour:
+  m_ObjectHideFlags: 3
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 66f335fb1ffd8684294ad653bf1c7564, type: 3}
+  m_Name: ColorAdjustments
+  m_EditorClassIdentifier: 
+  active: 1
+  m_AdvancedMode: 0
+  postExposure:
+    m_OverrideState: 0
+    m_Value: 0
+  contrast:
+    m_OverrideState: 0
+    m_Value: 0
+    min: -100
+    max: 100
+  colorFilter:
+    m_OverrideState: 0
+    m_Value: {r: 1, g: 1, b: 1, a: 1}
+    hdr: 1
+    showAlpha: 0
+    showEyeDropper: 1
+  hueShift:
+    m_OverrideState: 0
+    m_Value: 0
+    min: -180
+    max: 180
+  saturation:
+    m_OverrideState: 0
+    m_Value: 0
+    min: -100
+    max: 100
 --- !u!114 &-1811760106917236027
 MonoBehaviour:
   m_ObjectHideFlags: 3
@@ -50,7 +135,7 @@ MonoBehaviour:
     min: 0
   intensity:
     m_OverrideState: 1
-    m_Value: 0.15
+    m_Value: 0.4
     min: 0
   scatter:
     m_OverrideState: 0
@@ -82,6 +167,28 @@ MonoBehaviour:
     m_OverrideState: 0
     m_Value: 0
     min: 0
+--- !u!114 &-94365097521844398
+MonoBehaviour:
+  m_ObjectHideFlags: 3
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e021b4c809a781e468c2988c016ebbea, type: 3}
+  m_Name: ColorLookup
+  m_EditorClassIdentifier: 
+  active: 1
+  m_AdvancedMode: 0
+  texture:
+    m_OverrideState: 0
+    m_Value: {fileID: 0}
+  contribution:
+    m_OverrideState: 0
+    m_Value: 1
+    min: 0
+    max: 1
 --- !u!114 &11400000
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -99,6 +206,7 @@ MonoBehaviour:
   - {fileID: 7480256704928342475}
   - {fileID: -1811760106917236027}
   - {fileID: -7207865824924829443}
+  - {fileID: -3762771763759940918}
 --- !u!114 &3014464122006863072
 MonoBehaviour:
   m_ObjectHideFlags: 3
@@ -115,7 +223,7 @@ MonoBehaviour:
   m_AdvancedMode: 0
   intensity:
     m_OverrideState: 1
-    m_Value: 0.191
+    m_Value: 0.2
     min: 0
     max: 1
 --- !u!114 &7480256704928342475

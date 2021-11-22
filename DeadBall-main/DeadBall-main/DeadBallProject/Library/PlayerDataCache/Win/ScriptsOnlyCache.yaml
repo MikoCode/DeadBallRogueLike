@@ -73,12 +73,18 @@ ScriptsOnlyBuild:
     - UnityEngine.Rendering.UI.DebugUIHandlerVector3
     - UnityEngine.Rendering.UI.DebugUIHandlerVector4
     - UnityEngine.Rendering.UI.UIFoldout
+    - UnityEngine.Rendering.Volume
+    - UnityEngine.Rendering.VolumeProfile
     Unity.RenderPipelines.Universal.Editor.dll:
-    - UnityEditor.Experimental.Rendering.Universal.Path2D.ScriptablePathInspector
     - UnityEditor.Rendering.Universal.UniversalProjectSettings
     Unity.RenderPipelines.Universal.Runtime.dll:
     - UnityEngine.Experimental.Rendering.Universal.Light2D
     - UnityEngine.Experimental.Rendering.Universal.Renderer2DData
+    - UnityEngine.Rendering.Universal.Bloom
+    - UnityEngine.Rendering.Universal.ChromaticAberration
+    - UnityEngine.Rendering.Universal.FilmGrain
+    - UnityEngine.Rendering.Universal.LensDistortion
+    - UnityEngine.Rendering.Universal.LiftGammaGain
     - UnityEngine.Rendering.Universal.PostProcessData
     - UnityEngine.Rendering.Universal.UniversalAdditionalCameraData
     - UnityEngine.Rendering.Universal.UniversalRenderPipelineAsset
@@ -175,9 +181,17 @@ ScriptsOnlyBuild:
     - Class: 114
       Script: {instanceID: 4404}
     - Class: 114
+      Script: {instanceID: 4434}
+    - Class: 114
+      Script: {instanceID: 4468}
+    - Class: 114
+      Script: {instanceID: 4548}
+    - Class: 114
       Script: {instanceID: 4576}
     - Class: 114
       Script: {instanceID: 4684}
+    - Class: 114
+      Script: {instanceID: 5216}
     - Class: 114
       Script: {instanceID: 5352}
     - Class: 114
@@ -195,11 +209,11 @@ ScriptsOnlyBuild:
     - Class: 114
       Script: {instanceID: 5706}
     - Class: 114
+      Script: {instanceID: 5938}
+    - Class: 114
       Script: {instanceID: 5974}
     - Class: 114
       Script: {instanceID: 6092}
-    - Class: 114
-      Script: {instanceID: 6142}
     - Class: 114
       Script: {instanceID: 6234}
     - Class: 114
@@ -208,6 +222,8 @@ ScriptsOnlyBuild:
       Script: {instanceID: 6306}
     - Class: 114
       Script: {instanceID: 6312}
+    - Class: 114
+      Script: {instanceID: 6352}
     - Class: 114
       Script: {instanceID: 6420}
     - Class: 114
@@ -225,6 +241,8 @@ ScriptsOnlyBuild:
     - Class: 114
       Script: {instanceID: 6824}
     - Class: 114
+      Script: {instanceID: 6874}
+    - Class: 114
       Script: {instanceID: 6944}
     - Class: 114
       Script: {instanceID: 6998}
@@ -233,9 +251,9 @@ ScriptsOnlyBuild:
     - Class: 114
       Script: {instanceID: 7620}
     - Class: 114
-      Script: {instanceID: 7644}
-    - Class: 114
       Script: {instanceID: 7944}
+    - Class: 114
+      Script: {instanceID: 8088}
     - Class: 114
       Script: {instanceID: 8184}
     - Class: 115
@@ -245,10 +263,6 @@ ScriptsOnlyBuild:
     - Class: 157
       Script: {instanceID: 0}
     - Class: 196
-      Script: {instanceID: 0}
-    - Class: 198
-      Script: {instanceID: 0}
-    - Class: 199
       Script: {instanceID: 0}
     - Class: 212
       Script: {instanceID: 0}
@@ -312,9 +326,17 @@ ScriptsOnlyBuild:
     - Class: 114
       Script: {instanceID: 3970}
     - Class: 114
+      Script: {instanceID: 4434}
+    - Class: 114
+      Script: {instanceID: 4468}
+    - Class: 114
       Script: {instanceID: 4524}
     - Class: 114
+      Script: {instanceID: 4548}
+    - Class: 114
       Script: {instanceID: 4790}
+    - Class: 114
+      Script: {instanceID: 5216}
     - Class: 114
       Script: {instanceID: 5352}
     - Class: 114
@@ -334,6 +356,8 @@ ScriptsOnlyBuild:
     - Class: 114
       Script: {instanceID: 6314}
     - Class: 114
+      Script: {instanceID: 6352}
+    - Class: 114
       Script: {instanceID: 6416}
     - Class: 114
       Script: {instanceID: 6526}
@@ -350,6 +374,8 @@ ScriptsOnlyBuild:
     - Class: 114
       Script: {instanceID: 6862}
     - Class: 114
+      Script: {instanceID: 6874}
+    - Class: 114
       Script: {instanceID: 6906}
     - Class: 114
       Script: {instanceID: 7260}
@@ -363,6 +389,8 @@ ScriptsOnlyBuild:
       Script: {instanceID: 7736}
     - Class: 114
       Script: {instanceID: 7848}
+    - Class: 114
+      Script: {instanceID: 8088}
     - Class: 114
       Script: {instanceID: 8172}
     - Class: 114
@@ -1444,7 +1472,7 @@ ScriptsOnlyBuild:
     className: AudioPlayableAsset
   - hash:
       serializedVersion: 2
-      Hash: 23afbcf8e5098dd38c7e31952843c457
+      Hash: 7d3aff46c447a4156547074f143b704c
     assemblyName: Assembly-CSharp.dll
     namespaceName: 
     className: MainMenu
