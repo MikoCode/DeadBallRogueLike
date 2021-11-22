@@ -182,7 +182,7 @@ public class Spawner : MonoBehaviour
     }
 
 
-    void SpawnerSize()
+   public void SpawnerSize()
     {
         if (rand.place < 4)
         {

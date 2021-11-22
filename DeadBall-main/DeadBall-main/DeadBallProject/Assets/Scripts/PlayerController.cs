@@ -186,7 +186,7 @@ public class PlayerController : MonoBehaviour
 
 
 
-    void LoseHealth()
+     public void LoseHealth()
     {
         source.PlayOneShot(damageSound, 0.3f);
         if(gM.health == 3)

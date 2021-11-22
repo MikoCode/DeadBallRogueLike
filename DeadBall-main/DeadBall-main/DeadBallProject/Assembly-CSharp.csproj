@@ -99,6 +99,8 @@
     <Compile Include="Assets\FindEnemy.cs" />
     <Compile Include="Assets\StopLight.cs" />
     <Compile Include="Assets\Scripts\Portal.cs" />
+    <Compile Include="Assets\Bomb.cs" />
+    <Compile Include="Assets\Detonator.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Assets\TextMesh Pro\Shaders\TMPro.cginc" />
