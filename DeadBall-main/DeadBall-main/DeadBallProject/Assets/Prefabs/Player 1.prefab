@@ -123,8 +123,9 @@ MonoBehaviour:
   speed: 8
   gM: {fileID: 0}
   spawner: {fileID: 0}
-  shootSound: {fileID: 8300000, guid: 2c5292ba5cf254919a6b9e2b18e04f49, type: 3}
+  shootSound: {fileID: 8300000, guid: b99da9a57308d4ba1bee1cf1d9038376, type: 3}
   damageSound: {fileID: 8300000, guid: 7e9ee6dc04a5d40d1a5dfc4beb9865e7, type: 3}
+  boomSound: {fileID: 8300000, guid: 7bef0064f8567430cac22499c6b93d4f, type: 3}
   source: {fileID: 4390146768920439860}
   ballSpeed: 0
   time: 1
@@ -187,13 +188,13 @@ AudioSource:
   OutputAudioMixerGroup: {fileID: 0}
   m_audioClip: {fileID: 0}
   m_PlayOnAwake: 1
-  m_Volume: 1
+  m_Volume: 0.501
   m_Pitch: 1
   Loop: 0
   Mute: 0
   Spatialize: 0
   SpatializePostEffects: 0
-  Priority: 128
+  Priority: 150
   DopplerLevel: 1
   MinDistance: 1
   MaxDistance: 500

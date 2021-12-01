@@ -27,58 +27,69 @@ public class MainMusic : MonoBehaviour
             gM = GameObject.FindGameObjectWithTag("GameManager").GetComponent<GameManager>(); 
         }
 
-        if(gM.gameOver == true)
+        if(PlayerPrefs.GetInt("Sound") == 0)
         {
-            
-            time -= 1 * Time.deltaTime;
-            
-            if (time < 0 && audioSource.pitch > 0 )
-            {
-                if(audioSource.volume > 0.1f)
-                {
-                    audioSource.volume -= 0.1f;
-                }
-              
-                audioSource.pitch -= 0.07f;
-                time = startTime;
-            }
+            audioSource.volume = 0;
         }
-
-
-        if(gM.musicQuieter == true)
+        else
         {
 
-            time -= 1 * Time.deltaTime;
-            if (time < 0 && audioSource.volume > 0.2f)
+            if (gM.gameOver == true)
             {
-                
-                
-                    audioSource.volume -= 0.04f;
-                
 
-               
-                time = startTime;
-            }
-        }
+                time -= 1 * Time.deltaTime;
 
-        if(gM.musicLouder == true)
-        {
-            time -= 1 * Time.deltaTime;
-            if (time < 0 )
-            {
-                if (audioSource.volume < 0.3f)
+                if (time < 0 && audioSource.pitch > 0)
                 {
-                    audioSource.volume += 0.04f;
+                    if (audioSource.volume > 0.1f)
+                    {
+                        audioSource.volume -= 0.1f;
+                    }
+
+                    audioSource.pitch -= 0.07f;
                     time = startTime;
                 }
-                else
+            }
+
+
+            if (gM.musicQuieter == true)
+            {
+
+                time -= 1 * Time.deltaTime;
+                if (time < 0 && audioSource.volume > 0.1f)
                 {
-                    gM.musicLouder = false;
+
+
+                    audioSource.volume -= 0.04f;
+
+
+
+                    time = startTime;
+                }
+            }
+
+            if (gM.musicLouder == true)
+            {
+                time -= 1 * Time.deltaTime;
+                if (time < 0)
+                {
+                    if (audioSource.volume < 0.2f)
+                    {
+                        audioSource.volume += 0.04f;
+                        time = startTime;
+                    }
+                    else
+                    {
+                        gM.musicLouder = false;
+                    }
+
                 }
 
             }
-            
         }
+       
+
+        
       
     }
 

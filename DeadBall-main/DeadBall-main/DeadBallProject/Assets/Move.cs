@@ -12,11 +12,11 @@ public class Move : MonoBehaviour
     {
         if(mainMenu == true)
         {
-            speed = 25;
+            speed = 40;
         }
         else
         {
-            speed = 1250;
+            speed = 40;
         }
     }
 

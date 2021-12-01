@@ -655,7 +655,7 @@ MonoBehaviour:
   startDynamicly: 0
   returning: 0
   canReturn: 0
-  hitSound: {fileID: 8300000, guid: 19f89c6e740e7447f9e12a8310d3e973, type: 3}
+  hitSound: {fileID: 8300000, guid: b99da9a57308d4ba1bee1cf1d9038376, type: 3}
   source: {fileID: 8819958519759545299}
   light: {fileID: 6488486208091877194}
 --- !u!82 &8819958519759545299
@@ -676,7 +676,7 @@ AudioSource:
   Mute: 0
   Spatialize: 0
   SpatializePostEffects: 0
-  Priority: 128
+  Priority: 150
   DopplerLevel: 1
   MinDistance: 1
   MaxDistance: 500

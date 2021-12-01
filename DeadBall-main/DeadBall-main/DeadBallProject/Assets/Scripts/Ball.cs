@@ -26,7 +26,7 @@ public class Ball : MonoBehaviour
     public AudioClip hitSound;
     public AudioSource source;
     public Light2D light;
-
+    private SpriteRenderer sprite;
 
 
 
@@ -39,6 +39,7 @@ public class Ball : MonoBehaviour
         canReturn = false;
         gM = GameObject.FindGameObjectWithTag("GameManager").GetComponent<GameManager>();
         playerCon = GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerController>();
+        sprite = gameObject.GetComponent<SpriteRenderer>();
         box = gameObject.GetComponent<CircleCollider2D>();
         gM.isBallReturning = false;
         ballPower = 600; 
@@ -88,7 +89,7 @@ public class Ball : MonoBehaviour
         ballPower -= (rb.velocity.magnitude * 5);
         if (collision.gameObject.CompareTag("upBorder"))
         {
-            source.PlayOneShot(hitSound, 0.3f);
+            source.PlayOneShot(hitSound, 0.45f);
             canReturn = true;
             Instantiate(wallTouch, transform.position, Quaternion.identity);
             if (savedPosX <= posX)
@@ -105,7 +106,7 @@ public class Ball : MonoBehaviour
         }
         else if (collision.gameObject.CompareTag("downBorder"))
         {
-            source.PlayOneShot(hitSound, 0.3f);
+            source.PlayOneShot(hitSound, 0.45f);
             canReturn = true;
             Instantiate(wallTouch, transform.position, Quaternion.identity);
             if (savedPosX <=  posX)
@@ -124,12 +125,12 @@ public class Ball : MonoBehaviour
         }
         else if (collision.gameObject.CompareTag("leftBorder"))
         {
-            source.PlayOneShot(hitSound, 0.3f);
+            source.PlayOneShot(hitSound, 0.45f);
             canReturn = true;
             Instantiate(wallTouch, transform.position, Quaternion.identity);
             if (savedPosY <= posY)
             {
-                rb.AddForce(new Vector2(1, 0.2f) * ballPower);
+                rb.AddForce(new Vector2(1, 0.45f) * ballPower);
             }
            else
             {
@@ -143,7 +144,7 @@ public class Ball : MonoBehaviour
         }
         else if (collision.gameObject.CompareTag("rightBorder"))
         {
-            source.PlayOneShot(hitSound, 0.3f);
+            source.PlayOneShot(hitSound, 0.45f);
             canReturn = true;
             Instantiate(wallTouch, transform.position, Quaternion.identity);
             if (savedPosY <= posY)
@@ -162,7 +163,7 @@ public class Ball : MonoBehaviour
         }
         else if (collision.gameObject.CompareTag("RedCard"))
         {
-            source.PlayOneShot(hitSound, 1f);
+            source.PlayOneShot(hitSound, 0.8f);
             ParticleSystem touch=  Instantiate(enemyTouch, collision.gameObject.transform.position, Quaternion.identity);
             canReturn = true;
             touch.startColor = collision.gameObject.GetComponent<SpriteRenderer>().color;
@@ -170,7 +171,7 @@ public class Ball : MonoBehaviour
 
         else if (collision.gameObject.CompareTag("Goalkeeper"))
         {
-            source.PlayOneShot(hitSound, 1f);
+            source.PlayOneShot(hitSound, 0.6f);
             ParticleSystem touch = Instantiate(enemyTouch, collision.gameObject.transform.position, Quaternion.identity);
             touch.startColor = collision.gameObject.GetComponent<SpriteRenderer>().color;
             canReturn = true;
@@ -264,10 +265,10 @@ public class Ball : MonoBehaviour
 
             if(playerCon != null)
             {
-                transform.position = Vector2.MoveTowards(transform.position, playerCon.transform.position, 20f * Time.deltaTime);
+                transform.position = Vector2.MoveTowards(transform.position, playerCon.transform.position, 25f * Time.deltaTime);
             }
-           light.color = new Color(1, 0, 0.125f, 0.27f);
-            gameObject.GetComponent<SpriteRenderer>().color = new Color(1, 0, 0.125f, 0.27f);
+            light.color = new Color(1, 0, 0.125f, 0.27f);
+            sprite.color = new Color(1, 0, 0.125f, 0.27f);
 
 
 

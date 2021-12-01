@@ -35,7 +35,7 @@ public class YellowCard : MonoBehaviour
         source = GameObject.FindGameObjectWithTag("GameManager").GetComponent<AudioSource>();
         Invoke(("StartMoving"), 0.5f);
         health = 1;
-        speed = Random.Range(2,5);
+        speed = Random.Range(1.8f,3.7f);
         Player = GameObject.FindGameObjectWithTag("Player");
         gM.enemiesAlive += 1;
     }

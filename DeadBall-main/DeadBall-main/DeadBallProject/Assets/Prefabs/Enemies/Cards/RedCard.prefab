@@ -29,7 +29,7 @@ Transform:
   m_GameObject: {fileID: 1108744811313100810}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 5.445009, y: 7.2386656, z: 0}
-  m_LocalScale: {x: 0.65733224, y: 1.0225428, z: 1}
+  m_LocalScale: {x: 0.5277721, y: 0.8, z: 1}
   m_Children:
   - {fileID: 7663079131494356424}
   m_Father: {fileID: 0}
@@ -150,7 +150,7 @@ MonoBehaviour:
   health: 3
   destroySound: {fileID: 8300000, guid: 7bef0064f8567430cac22499c6b93d4f, type: 3}
   amount: 10
-  OriginalPos: {x: 0, y: 0, z: 0}
+  rb: {fileID: 1108744811313100804}
 --- !u!1 &5512220449512147858
 GameObject:
   m_ObjectHideFlags: 0

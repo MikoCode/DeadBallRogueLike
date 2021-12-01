@@ -69,11 +69,14 @@
     <Compile Include="Assets\MainMusic.cs" />
     <Compile Include="Assets\NeonShapes\SelfDestroyScript.cs" />
     <Compile Include="Assets\Scripts\LightColors.cs" />
+    <Compile Include="Assets\Bomb.cs" />
     <Compile Include="Assets\DontGoThroughThings.cs" />
     <Compile Include="Assets\Destroyer.cs" />
     <Compile Include="Assets\Scripts\GameManager.cs" />
     <Compile Include="Assets\Scripts\Enemies\SpinningEnemy.cs" />
+    <Compile Include="Assets\Detonator.cs" />
     <Compile Include="Assets\Scripts\Enemies\EnemyShooting.cs" />
+    <Compile Include="Assets\FindCamera.cs" />
     <Compile Include="Assets\Scripts\Border.cs" />
     <Compile Include="Assets\Scripts\MovingNeon.cs" />
     <Compile Include="Assets\Scripts\DelayLight.cs" />
@@ -88,6 +91,7 @@
     <Compile Include="Assets\Healing.cs" />
     <Compile Include="Assets\Scripts\Randomizer.cs" />
     <Compile Include="Assets\DestroyableDoors.cs" />
+    <Compile Include="Assets\Scripts\AttachGameObjectsToParticles.cs" />
     <Compile Include="Assets\Scripts\MainMenu.cs" />
     <Compile Include="Assets\Scripts\Cover.cs" />
     <Compile Include="Assets\SpinnerShard.cs" />
@@ -99,8 +103,6 @@
     <Compile Include="Assets\FindEnemy.cs" />
     <Compile Include="Assets\StopLight.cs" />
     <Compile Include="Assets\Scripts\Portal.cs" />
-    <Compile Include="Assets\Bomb.cs" />
-    <Compile Include="Assets\Detonator.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Assets\TextMesh Pro\Shaders\TMPro.cginc" />

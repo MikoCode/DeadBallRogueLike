@@ -40,6 +40,13 @@ public class Goal : MonoBehaviour
     {
         if (collision.gameObject.CompareTag("Ball") && didScore == false && isQuest == false)
         {
+            gM.goalsCount += 1;
+            PlayerPrefs.SetInt("Goals", gM.goalsCount);
+            gM.level.text = "Goals: " + gM.goalsCount;
+            if (gM.goalsCount > gM.highScore)
+            {
+                PlayerPrefs.SetInt("HighScore", gM.goalsCount);
+            }
             refreshGoalKeeper = true;
             didScore = true;
             goalLight.gameObject.SetActive(true);
@@ -64,6 +71,9 @@ public class Goal : MonoBehaviour
 
         else if (collision.gameObject.CompareTag("Ball") && didScore == false && isQuest == true)
         {
+            gM.goalsCount += 1;
+            PlayerPrefs.SetInt("Goals", gM.goalsCount);
+            gM.level.text = "Goals: " + gM.goalsCount;
             refreshGoalKeeper = true;
             didScore = true;
             goalLight.gameObject.SetActive(true);

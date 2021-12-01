@@ -2,11 +2,17 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+
 public class SpinnerShard : MonoBehaviour
 {
     public SpinningEnemy spinner;
     private GameManager gM;
-    
+    public SpriteRenderer sprite;
+    public GameObject particle;
+    public CircleCollider2D cc;
+    public GameObject light2D;
+
+
     // Start is called before the first frame update
     void Start()
     {
@@ -23,7 +29,9 @@ public class SpinnerShard : MonoBehaviour
     {
         if (collision.gameObject.CompareTag("Ball"))
         {
-          
+            sprite.enabled = false;
+            cc.enabled = false;
+            Destroy(light2D);
             spinner.health -= 1;
             Instantiate(spinner.particleSmall, transform.position, Quaternion.identity);
             
@@ -33,16 +41,20 @@ public class SpinnerShard : MonoBehaviour
 
                 gM.enemiesKilled += 1;
                 gM.enemiesAlive -= 1;
-                spinner.source.PlayOneShot(spinner.destroySpinner, 1f);
-                Instantiate(spinner.particleBig, transform.position, Quaternion.identity);
-                Destroy(spinner.gameObject);
+                spinner.StartCoroutine("Dying");
+
+
+
             }
             else
             {
                 spinner.source.PlayOneShot(spinner.destroyShard, 0.4f);
+
             }
 
-            Destroy(gameObject);
+            particle.gameObject.SetActive(true);
+
+
 
         }
        else if (collision.gameObject.CompareTag("Player") || (collision.gameObject.CompareTag("RedCard")))

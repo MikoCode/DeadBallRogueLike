@@ -21,8 +21,9 @@ public class PlayerController : MonoBehaviour
     public GameManager gM;
     public Spawner spawner;
     private Vector2 movement;
-    public AudioClip shootSound, damageSound;
+    public AudioClip shootSound, damageSound,boomSound;
     public AudioSource source;
+    private bool canLoseHp;
    
     private Vector2 mousePos;
     private Ball ballScript;
@@ -34,7 +35,8 @@ public class PlayerController : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-       
+        canLoseHp = true;
+        source = GameObject.FindGameObjectWithTag("PlayerAudio").GetComponent<AudioSource>();
         gM = GameObject.FindGameObjectWithTag("GameManager").GetComponent<GameManager>();
         StartCoroutine("PlayerStart");
         
@@ -64,7 +66,11 @@ public class PlayerController : MonoBehaviour
         movement.x = -Input.GetAxisRaw("Vertical");
         movement = movement.normalized;
         mousePos = cam.ScreenToWorldPoint(Input.mousePosition);
-        Shoot();
+        if (gM.paused == false)
+        {
+            Shoot();
+        }
+       
        
     }
 
@@ -111,7 +117,7 @@ public class PlayerController : MonoBehaviour
     void Shoot()
     {
 
-        if (hasBall == true ) // naprawiæ, dzia³¹ tylko gdy jest bramkarz
+        if (hasBall == true ) 
 
         {
             
@@ -120,7 +126,7 @@ public class PlayerController : MonoBehaviour
 
             if (Input.GetKeyDown(KeyCode.Space) || Input.GetKeyDown(KeyCode.Mouse0))
             {
-                source.PlayOneShot(shootSound, 0.4f);
+                source.PlayOneShot(shootSound, 1f);
                 ballShootParticle.Play();
                 GameObject projectile =  Instantiate(ball, ballPoint.position, ballPoint.rotation);
                 Rigidbody2D rb = projectile.GetComponent<Rigidbody2D>();
@@ -146,15 +152,21 @@ public class PlayerController : MonoBehaviour
     {
         if (collision.gameObject.CompareTag("RedCard"))
         {
-            LoseHealth();
+            if (canLoseHp == true)
+            {
+                StartCoroutine("LoseHp");
+                LoseHealth();
+            }
+           
 
-            PlayerPrefs.SetInt("GameHealth", gM.health);
+          
+
         }
         else if (collision.gameObject.CompareTag("Spike"))
         {
             LoseHealth();
 
-            PlayerPrefs.SetInt("GameHealth", gM.health);
+            
         }
 
     }
@@ -164,7 +176,7 @@ public class PlayerController : MonoBehaviour
         {
             LoseHealth();
          
-            PlayerPrefs.SetInt("GameHealth", gM.health);
+            
             gM.enemiesAlive -= 1;
             gM.enemiesKilled += 1;
             Destroy(collision.gameObject);
@@ -175,7 +187,7 @@ public class PlayerController : MonoBehaviour
 
             LoseHealth();
             
-                PlayerPrefs.SetInt("GameHealth", gM.health);
+              
                 gM.enemiesKilled += 1;
                 Destroy(collision.gameObject);
             
@@ -188,16 +200,18 @@ public class PlayerController : MonoBehaviour
 
      public void LoseHealth()
     {
-        source.PlayOneShot(damageSound, 0.3f);
+        
         if(gM.health == 3)
         {
-           gM.hearth[2].enabled = false;
+            source.PlayOneShot(damageSound, 0.3f);
+            gM.hearth[2].enabled = false;
             LoseHealthImage();
             Instantiate(loseHealth[0], transform.position, Quaternion.identity);
 
         }
         else if(gM.health == 2)
         {
+            source.PlayOneShot(damageSound, 0.3f);
             gM.hearth[1].enabled = false;
             LoseHealthImage();
             Instantiate(loseHealth[0], transform.position, Quaternion.identity);
@@ -207,8 +221,8 @@ public class PlayerController : MonoBehaviour
         else if(gM.health == 1)
         {
             gM.hearth[0].enabled = false;
-
-            
+            LoseHealthImage();
+            source.PlayOneShot(boomSound, 1f);
             gM.GameOver();
             Instantiate(loseHealth[1], transform.position, Quaternion.identity);
             Instantiate(destroyer, transform.position, Quaternion.identity);
@@ -218,7 +232,8 @@ public class PlayerController : MonoBehaviour
         }
 
         gM.health -= 1;
-        
+
+        PlayerPrefs.SetInt("GameHealth", gM.health);
     }
   void LoseHealthImage()
     {
@@ -234,5 +249,10 @@ public class PlayerController : MonoBehaviour
         
         sprite.enabled = true;
     }
-
+    IEnumerator LoseHp()
+    {
+        canLoseHp = false;
+        yield return new WaitForSeconds(0.7f);
+        canLoseHp = true;
+    }
 }

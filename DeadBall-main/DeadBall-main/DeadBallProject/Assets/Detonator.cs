@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class Detonator : MonoBehaviour
 {
-    public bool ready;
+    public bool ready, colliding;
     private PlayerController pc;
     public ParticleSystem explosion;
     // Start is called before the first frame update
@@ -18,24 +18,54 @@ public class Detonator : MonoBehaviour
     {
         if(ready== true)
         {
-           // Instantiate(explosion, transform.position, Quaternion.identity);
-            Destroy(gameObject,0.1f);
+            StartCoroutine("Detonation");
+            ready = false;
+           
         }
     }
 
 
     
-    private void OnTriggerStay2D(Collider2D collision)
+    private void OnTriggerEnter2D(Collider2D collision)
     {
         if (collision.gameObject.CompareTag("Player"))
         {
-            if(ready == true)
-            {
-              //  Instantiate(explosion, transform.position, Quaternion.identity);
-                pc.LoseHealth();
-                Destroy(gameObject);
-            }
+            colliding = true;
+            
             
         }
+        
+    }
+    private void OnTriggerExit2D(Collider2D collision)
+    {
+        if (collision.gameObject.CompareTag("Player"))
+        {
+            colliding = false;
+
+
+        }
+    }
+    IEnumerator Detonation()
+    {
+
+        yield return new WaitForSeconds(1f);
+
+        Instantiate(explosion, transform.position, Quaternion.identity);
+
+        if (colliding == true)
+        {
+           
+            pc.LoseHealth();
+           
+            
+            colliding = false;
+
+        }
+        
+        
+            Destroy(gameObject);
+        
+       
+
     }
 }

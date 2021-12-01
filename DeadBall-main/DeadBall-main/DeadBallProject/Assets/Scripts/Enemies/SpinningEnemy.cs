@@ -16,9 +16,14 @@ public class SpinningEnemy : MonoBehaviour
     public AudioSource source;
     public AudioClip destroyShard;
     public AudioClip destroySpinner;
+    private Vector3 OriginalPos;
+    private bool isShaking;
+    public float amount;
+   
     // Start is called before the first frame update
     void Start()
     {
+       
         if (areSpawned == true)
         {
             gameObject.SetActive(false);
@@ -36,8 +41,20 @@ public class SpinningEnemy : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
+        if (isShaking)
+        {
+            transform.Rotate(new Vector3(0, 0, 5), 150 * Time.deltaTime);
+
+            Vector3 newPos = OriginalPos + Random.insideUnitSphere * (Time.deltaTime * amount);
+
+            newPos.z = transform.position.z;
+            transform.position = newPos;
+        }
+       
+        if(isShaking == false)
+        {
             Moving();
+        }
        
        
         
@@ -49,7 +66,7 @@ public class SpinningEnemy : MonoBehaviour
         {
             transform.position = Vector2.MoveTowards(transform.position, newPos, speed * Time.deltaTime);
         }
-        transform.Rotate(new Vector3(0,0,5), 150 * Time.deltaTime);
+        transform.Rotate(new Vector3(0, 0, 5), 150 * Time.deltaTime);
 
 
         if (gameObject.transform.position.x == newPos.x && gameObject.transform.position.y == gameObject.transform.position.y)
@@ -83,5 +100,20 @@ public class SpinningEnemy : MonoBehaviour
     {
         start = true;
         gameObject.SetActive(true);
+    }
+
+    public IEnumerator Dying()
+    {
+        OriginalPos = transform.position;
+
+        if (isShaking == false)
+        {
+            isShaking = true;
+        }
+
+        yield return new WaitForSeconds(1f);
+        Instantiate(particleBig, transform.position, Quaternion.identity);
+        source.PlayOneShot(destroySpinner, 1f);
+        Destroy(gameObject);
     }
 }

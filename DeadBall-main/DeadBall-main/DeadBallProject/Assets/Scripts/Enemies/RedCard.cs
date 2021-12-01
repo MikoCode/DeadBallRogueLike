@@ -14,9 +14,13 @@ public class RedCard : MonoBehaviour
     public float amount;
     private Vector3 OriginalPos;
     private bool isShaking;
+    public Rigidbody2D rb;
+    private bool following;
+    
     // Start is called before the first frame update
     void Start()
     {
+        following = true;
         gM = GameObject.FindGameObjectWithTag("GameManager").GetComponent<GameManager>();
         source = GameObject.FindGameObjectWithTag("GameManager").GetComponent<AudioSource>();
         speed = Random.Range(2,4);
@@ -29,7 +33,10 @@ public class RedCard : MonoBehaviour
     {
         if(Player != null)
         {
-            transform.position = Vector2.MoveTowards(transform.position, new Vector2(Player.transform.position.x, Player.transform.position.y), speed * Time.deltaTime);
+            
+                transform.position = Vector2.MoveTowards(transform.position, new Vector2(Player.transform.position.x, Player.transform.position.y), speed * Time.deltaTime);
+            
+          
         }
 
         if (isShaking)
@@ -59,12 +66,16 @@ public class RedCard : MonoBehaviour
                 Destroy(gameObject);
             }
         }
-       
+
         else if (collision.gameObject.CompareTag("RedCard"))
         {
             transform.position = new Vector2(transform.position.x, transform.position.y);
         }
 
+        else if (collision.gameObject.CompareTag("Player"))
+        {
+            
+        }
 
 
 
@@ -83,4 +94,16 @@ public class RedCard : MonoBehaviour
         isShaking = false;
         transform.position = OriginalPos;
     }
+
+    public IEnumerator RestartCons()
+    {
+        yield return new WaitForSeconds(0.3f);
+       
+        following = true;
+       
+
+
+    }
+
+    
 }
