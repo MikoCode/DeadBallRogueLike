@@ -4,26 +4,26 @@ using UnityEngine;
 
 public class Goalkeeper : MonoBehaviour
 {
+
+
+    private float startPosX, startPosY, offset;
+    private bool goingBack;
+    public bool isVertical;
+    private bool goalComponents;
+    public int difficulty; // 1- Easy 2- Normal 3 - Hard
+    [SerializeField] private int direction;
+    [SerializeField] private float speed;
     public Transform Ball;
     public PlayerController playerCon;
     public Goal goal;
-    private Spawner spawner;
     public GameObject hearth;
-    [SerializeField] private float speed;
-    private float startPosX, startPosY;
-    private bool goingBack, chosen;
-    [SerializeField] private int direction;
-    public bool isVertical;
-    private float offset;
-    private bool goalComponents;
-    public int difficulty; // 1- Easy 2- Normal 3 - Hard
-    
+   
 
     public AudioClip defend;
     // Start is called before the first frame update
     void Start()
     {
-        spawner = GameObject.FindGameObjectWithTag("GameManager").GetComponent<Spawner>();
+       
             
         startPosX = transform.position.x;
         startPosY = transform.position.y;
@@ -140,7 +140,7 @@ public class Goalkeeper : MonoBehaviour
             if (transform.position.x == startPosX)
             {
                 goingBack = false;
-                chosen = false;
+               
             }
 
 
@@ -150,7 +150,7 @@ public class Goalkeeper : MonoBehaviour
         if (playerCon.hasBall == true)
         {
             transform.position = Vector2.MoveTowards(transform.position, new Vector2(startPosX +offset, transform.position.y), 3 * Time.deltaTime);
-            chosen = false;
+            
         }
     }
 
@@ -221,7 +221,7 @@ public class Goalkeeper : MonoBehaviour
             if (transform.position.y == startPosY)
             {
                 goingBack = false;
-                chosen = false;
+                
             }
 
 
@@ -231,7 +231,7 @@ public class Goalkeeper : MonoBehaviour
         if (playerCon.hasBall == true)
         {
             transform.position = Vector2.MoveTowards(transform.position, new Vector2(transform.position.x, startPosY + offset), 3 * Time.deltaTime);
-            chosen = false;
+           
         }
     }
 

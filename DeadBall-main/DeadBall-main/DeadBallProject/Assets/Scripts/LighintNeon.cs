@@ -12,13 +12,6 @@ public class LighintNeon : MonoBehaviour
     void Start()
     {
         ChangeColor();
-       
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-       
     }
 
     public void ChangeColor()
@@ -27,7 +20,6 @@ public class LighintNeon : MonoBehaviour
         {
             light.color = new Color(Random.value, Random.value, Random.value);
         }
-       
        
     }
 }

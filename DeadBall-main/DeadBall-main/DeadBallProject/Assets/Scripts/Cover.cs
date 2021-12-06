@@ -3,21 +3,21 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class Cover : MonoBehaviour
-{
-    private Vector3 OriginalPos;
+{ 
     private bool isShaking;
-    public ParticleSystem explosion;
-   [SerializeField] private int hp;
     public float amount;
+    [SerializeField] private int hp;
+    public ParticleSystem explosion;
     public SpriteRenderer[] color;
     public BoxCollider2D[] box;
     private AudioSource source;
     public AudioClip clip;
+    private Vector3 OriginalPos;
+
     // Start is called before the first frame update
     void Start()
     {
         hp = 15;
-        // transform.rotation = Quaternion.Euler(0, 0, 90);
         source = GameObject.FindGameObjectWithTag("GameManager").GetComponent<AudioSource>();
     }
 

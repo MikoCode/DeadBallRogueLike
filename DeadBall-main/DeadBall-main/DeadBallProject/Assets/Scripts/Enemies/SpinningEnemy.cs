@@ -4,21 +4,19 @@ using UnityEngine;
 
 public class SpinningEnemy : MonoBehaviour
 {
-    private Transform playerCon;
-    private Vector2 newPos;
-    private GameManager gM;
-    public ParticleSystem particleSmall;
-    public ParticleSystem particleBig;
-    public float health;
-    private bool start;
-    public float speed;
+    private bool start, isShaking;
+    public float speed, amount, health;
     public bool areSpawned;
     public AudioSource source;
     public AudioClip destroyShard;
     public AudioClip destroySpinner;
+    private GameManager gM;
+    public ParticleSystem particleSmall;
+    public ParticleSystem particleBig;
+    private Transform playerCon;
+    private Vector2 newPos;
     private Vector3 OriginalPos;
-    private bool isShaking;
-    public float amount;
+   
    
     // Start is called before the first frame update
     void Start()
@@ -28,11 +26,16 @@ public class SpinningEnemy : MonoBehaviour
         {
             gameObject.SetActive(false);
         }
+
         health = 3;
+
         gM = GameObject.FindGameObjectWithTag("GameManager").GetComponent<GameManager>();
-        source = GameObject.FindGameObjectWithTag("GameManager").GetComponent<AudioSource>();
         gM.enemiesAlive += 1;
+
+        source = GameObject.FindGameObjectWithTag("GameManager").GetComponent<AudioSource>();
+
         InvokeRepeating("GetPlayerPos", 1f, Random.Range(3, 6));
+
         playerCon = GameObject.FindGameObjectWithTag("Player").transform;
         Invoke("StartMoving", 2f);
 
@@ -56,8 +59,6 @@ public class SpinningEnemy : MonoBehaviour
             Moving();
         }
        
-       
-        
     }
 
     void Moving()
@@ -66,6 +67,7 @@ public class SpinningEnemy : MonoBehaviour
         {
             transform.position = Vector2.MoveTowards(transform.position, newPos, speed * Time.deltaTime);
         }
+
         transform.Rotate(new Vector3(0, 0, 5), 150 * Time.deltaTime);
 
 
@@ -93,7 +95,6 @@ public class SpinningEnemy : MonoBehaviour
             transform.position = new Vector2(transform.position.x, transform.position.y);
         }
 
-
     }
 
     void StartMoving()
@@ -112,6 +113,7 @@ public class SpinningEnemy : MonoBehaviour
         }
 
         yield return new WaitForSeconds(1f);
+
         Instantiate(particleBig, transform.position, Quaternion.identity);
         source.PlayOneShot(destroySpinner, 1f);
         Destroy(gameObject);

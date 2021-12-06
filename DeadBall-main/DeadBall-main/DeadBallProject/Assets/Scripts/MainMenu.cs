@@ -7,13 +7,12 @@ using UnityEngine.UI;
 
 public class MainMenu : MonoBehaviour
 {
+    private bool start, settingPos;
     public Move[] smoothTransition;
     public Camera mainCam;
-    private bool start;
     public GameManager gM;
     public GameObject highScoreObject;
     public TextMeshProUGUI highScoreText;
-    private bool settingPos;
     public Image renderer;
     public Sprite[] sprite;
     // Start is called before the first frame update
@@ -75,11 +74,6 @@ public class MainMenu : MonoBehaviour
         }
     }
 
-
-    public void CameraTV()
-    {
-      
-    }
 
     public void SoundButton()
     {

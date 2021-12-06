@@ -4,33 +4,30 @@ using UnityEngine;
 
 public class EnemyShooting : MonoBehaviour
 {
-    [SerializeField] private int health = 1;
-    private GameManager gM;
-    private Transform playerCon;
-    private Vector2 newPos;
-    public GameObject projectile, bomb;
-    public float startTimeBtwShoots;
-    private bool moving, angered;
-    [Range(1,2)]
+    [Range(1, 2)]
     public int mode; // 1 - slow, 2 - fast, 3 - multiple;
+    private int bombInstantiated;
     private float curTimeBtwShoots;
-    private bool startShooting,  series;
-    public float whenToShoot;
-    public ParticleSystem destroyParticle;
     public float speed;
-    private Rigidbody2D rb;
+    public float amount;
+    public float startTimeBtwShoots;
     public float distanceToStop;
+    public float whenToShoot;
     public bool areSpawned, bomber, isShaking, smallShooter, shooting;
+    private bool moving, angered;
+    private bool startShooting;
+    [SerializeField] private int health = 1;
     public AudioClip destroySound;
     public AudioClip shoot;
     private AudioSource source;
-    public float amount;
-    private Vector3 OriginalPos;
-    private int bombInstantiated;
     public AudioSource ownSource;
-    
-    
-    
+    public ParticleSystem destroyParticle;
+    private GameManager gM;
+    private Transform playerCon;
+    public GameObject projectile, bomb;
+    private Vector2 newPos;
+    private Vector3 OriginalPos;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -55,7 +52,6 @@ public class EnemyShooting : MonoBehaviour
       
         playerCon = GameObject.FindGameObjectWithTag("Player").transform;
         curTimeBtwShoots = startTimeBtwShoots;
-        rb = gameObject.GetComponent<Rigidbody2D>();
         shooting = true;
         gM = GameObject.FindGameObjectWithTag("GameManager").GetComponent<GameManager>();
         source = GameObject.FindGameObjectWithTag("GameManager").GetComponent<AudioSource>();
@@ -86,7 +82,6 @@ public class EnemyShooting : MonoBehaviour
         if (isShaking)
         {
             Vector3 newPos =  OriginalPos + Random.insideUnitSphere * (Time.deltaTime * amount);
-            
             newPos.z = transform.position.z;
             transform.position = newPos;
         }
@@ -137,20 +132,16 @@ public class EnemyShooting : MonoBehaviour
 
         if (collision.gameObject.layer == 3)
         {
-
             newPos = new Vector2(transform.position.x - Random.Range(-2, 2), transform.position.y - Random.Range(-2, 2));
             moving = true;
-          
         }
         else
         {
-         
             moving = false;
             if(playerCon != null)
             {
                 newPos = playerCon.transform.position;
             }
-          
         }
     }
 
@@ -158,9 +149,6 @@ public class EnemyShooting : MonoBehaviour
 
     void Shoot()
     {
-
-        
-        
             if (startShooting == true && playerCon != null && shooting == true)
             {
                  if (mode == 1)
@@ -230,10 +218,6 @@ public class EnemyShooting : MonoBehaviour
             }
             
             }
-
-        
-       
-
     }
 
 
@@ -246,8 +230,6 @@ public class EnemyShooting : MonoBehaviour
             {
                 shooting = false;
             }
-           
-           
         }
         else
         {
@@ -258,7 +240,6 @@ public class EnemyShooting : MonoBehaviour
         {
             transform.position = Vector2.MoveTowards(transform.position, newPos, speed * Time.deltaTime);
         }
-       
     }
 
     void GetPlayerPos()
@@ -267,8 +248,6 @@ public class EnemyShooting : MonoBehaviour
         {
             newPos = new Vector2(playerCon.position.x + Random.Range(-4.1f, 4.1f), playerCon.position.y + Random.Range(-4.1f, 4.1f));
         }
-
-        
     }
 
 

@@ -6,6 +6,15 @@ using UnityEngine.UI;
 
 public class PlayerController : MonoBehaviour
 {
+    private bool camera, isMoving, canLoseHp;
+    public bool hasBall = true, refreshGoalKeeper, up, down, right, left;
+    public float ballSpeed, speed;
+    [SerializeField] float time = 0.2f;
+    public GameManager gM;
+    public Spawner spawner;
+    public AudioClip shootSound, damageSound, boomSound;
+    public AudioSource source;
+    public SpriteRenderer sprite;
     public Rigidbody2D rb;
     public GameObject ball;
     public GameObject ballSprite, destroyer;
@@ -13,24 +22,8 @@ public class PlayerController : MonoBehaviour
     public Camera cam;
     public ParticleSystem[] loseHealth;
     public ParticleSystem startingParticle, ballShootParticle;
-    public bool hasBall = true, refreshGoalKeeper;
-    public SpriteRenderer sprite;
-    public bool up, down, right, left;
-    private bool isMoving;
-    public float speed;
-    public GameManager gM;
-    public Spawner spawner;
-    private Vector2 movement;
-    public AudioClip shootSound, damageSound,boomSound;
-    public AudioSource source;
-    private bool canLoseHp;
-   
     private Vector2 mousePos;
-    private Ball ballScript;
-    public float ballSpeed;
-    [SerializeField] float time = 0.2f;
-    private bool camera;
-   
+    private Vector2 movement;
 
     // Start is called before the first frame update
     void Start()
@@ -46,17 +39,17 @@ public class PlayerController : MonoBehaviour
     void Update()
     {
 
-       
         if(camera == false)
         {
-           
             cam = GameObject.FindGameObjectWithTag("Pitch").GetComponentInChildren<Camera>();
             camera = true;
         }
+
         if(isMoving == true)
         {
             ballSpeed = speed * 2f;
         }
+
         else
         {
             ballSpeed = 12f;
@@ -66,11 +59,11 @@ public class PlayerController : MonoBehaviour
         movement.x = -Input.GetAxisRaw("Vertical");
         movement = movement.normalized;
         mousePos = cam.ScreenToWorldPoint(Input.mousePosition);
+
         if (gM.paused == false)
         {
             Shoot();
         }
-       
        
     }
 
@@ -84,9 +77,6 @@ public class PlayerController : MonoBehaviour
             rb.rotation = angle;
         }
       
-      
-
-
     }
 
 
@@ -100,7 +90,6 @@ public class PlayerController : MonoBehaviour
             {
                 speed += 0.9f;
                 time = 0.2f;
-
             }
         }
         else
@@ -120,7 +109,6 @@ public class PlayerController : MonoBehaviour
         if (hasBall == true ) 
 
         {
-            
             ballSprite.gameObject.SetActive(true);
             
 
@@ -142,7 +130,6 @@ public class PlayerController : MonoBehaviour
         {
             ballSprite.gameObject.SetActive(false);
             
-          
         }
 
     }
@@ -158,15 +145,11 @@ public class PlayerController : MonoBehaviour
                 LoseHealth();
             }
            
-
-          
-
         }
         else if (collision.gameObject.CompareTag("Spike"))
         {
             LoseHealth();
 
-            
         }
 
     }
@@ -193,9 +176,6 @@ public class PlayerController : MonoBehaviour
             
         }
     }
-
-
-
 
 
      public void LoseHealth()
@@ -228,7 +208,6 @@ public class PlayerController : MonoBehaviour
             Instantiate(destroyer, transform.position, Quaternion.identity);
             Destroy(gameObject);
             
-
         }
 
         gM.health -= 1;
@@ -244,7 +223,6 @@ public class PlayerController : MonoBehaviour
 
     IEnumerator PlayerStart()
     {
-       
         yield return new WaitForSeconds(1f);
         
         sprite.enabled = true;

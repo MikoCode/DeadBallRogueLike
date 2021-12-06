@@ -4,12 +4,13 @@ using UnityEngine;
 
 public class EnemyBullet : MonoBehaviour
 {
-    private PlayerController Player;
-    private Vector3 moveDirection;
+    
+    
     public bool isMultiple;
-    private float posX, posY;
     public float speed;
     private Rigidbody2D rb;
+    private PlayerController Player;
+    private Vector3 moveDirection;
     // Start is called before the first frame update
     void Start()
     {
@@ -41,7 +42,6 @@ public class EnemyBullet : MonoBehaviour
     {
         if (collision.gameObject.CompareTag("Player"))
         {
-            
             Destroy(gameObject);
         }
         else if (collision.gameObject.CompareTag("Ball"))

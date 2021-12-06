@@ -5,19 +5,18 @@ using UnityEngine;
 public class YellowCard : MonoBehaviour
 {
     private float speed;
+    public int health;
+    private bool isRed;
+    public bool areSpawned, start;
+    public AudioClip destroySound;
+    private AudioSource source;
+    public ParticleSystem explosion;
+    public SpriteRenderer sprite;
+    public BoxCollider2D bc;
     private GameObject Player;
     public Rigidbody2D rb;
     public GameManager gM;
-    public int health;
-    public SpriteRenderer sprite;
-    public BoxCollider2D bc;
-    private bool isRed;
     public GameObject redCard;
-    public bool start;
-    public ParticleSystem explosion;
-    public bool areSpawned;
-    public AudioClip destroySound;
-    private AudioSource source;
 
 
 
@@ -29,23 +28,25 @@ public class YellowCard : MonoBehaviour
         {
             gameObject.SetActive(false);
         }
+
         Invoke("StartMoving", 1f);
         Invoke("SetActive", Random.Range(1.7f,3.1f));
+        Player = GameObject.FindGameObjectWithTag("Player");
         gM = GameObject.FindGameObjectWithTag("GameManager").GetComponent<GameManager>();
+        gM.enemiesAlive += 1;
         source = GameObject.FindGameObjectWithTag("GameManager").GetComponent<AudioSource>();
-        Invoke(("StartMoving"), 0.5f);
+        
         health = 1;
         speed = Random.Range(1.8f,3.7f);
-        Player = GameObject.FindGameObjectWithTag("Player");
-        gM.enemiesAlive += 1;
+        
+        
     }
 
     // Update is called once per frame
     void Update()
     {
         Moving();
-      
-            
+         
     }
 
 
@@ -56,26 +57,19 @@ public class YellowCard : MonoBehaviour
     {
         if (collision.gameObject.CompareTag("Card"))
         {
-
             gM.enemiesAlive -= 1;
-
             if (isRed == false)
             {
                 if(GetInstanceID() < collision.gameObject.GetInstanceID())
                 {
-                    
                     Instantiate(redCard, collision.gameObject.transform.position, Quaternion.identity);
                 }
 
                 isRed = true;
                 Destroy(gameObject);
                
-                
             }
             
-            
-
-           
         }
 
        else  if (collision.gameObject.CompareTag("Ball")  && ( start == true) && gM.isBallReturning == false)

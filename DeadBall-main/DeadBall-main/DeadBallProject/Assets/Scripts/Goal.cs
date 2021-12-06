@@ -5,8 +5,8 @@ using UnityEngine.SceneManagement;
 
 public class Goal : MonoBehaviour
 {
+    public bool refreshGoalKeeper, didScore, isQuest;
     public GameObject ball;
-    public bool refreshGoalKeeper;
     private GameManager gM;
     public AudioClip goalSound;
     public AudioClip playerTeleport;
@@ -18,9 +18,8 @@ public class Goal : MonoBehaviour
     public GameObject Player;
     public GameObject goalLight;
     public Transform startPlayer;
-    public bool didScore;
     public GameObject box;
-    public bool isQuest;
+
     // Start is called before the first frame update
     void Start()
     {

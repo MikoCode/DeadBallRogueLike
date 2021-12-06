@@ -4,15 +4,14 @@ using UnityEngine;
 using UnityEngine.Experimental.Rendering.Universal;
 public class MovingNeon : MonoBehaviour
 {
-    public bool isStarting;
+    public bool isStarting, mainMenu;
     public string whereToMove;
-    private Vector2 startPos;
-    public Light2D light;
     private bool stopLight;
-    private GameManager gM;
     private int speed;
+    public Light2D light; 
     public ParticleSystem destroyParticle;
-    public bool mainMenu;
+    
+    private Vector2 startPos;
     // Start is called before the first frame update
     void Start()
     {

@@ -4,15 +4,13 @@ using UnityEngine;
 using UnityEngine.UI;
 public class HealthBar : MonoBehaviour
 {
-    public GameManager gM;
+    public bool checkHealth;
     public int healthReq;
     public Image image;
-    public bool checkHealth;
+    public GameManager gM;
+   
     // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
+   
 
     // Update is called once per frame
     void Update()

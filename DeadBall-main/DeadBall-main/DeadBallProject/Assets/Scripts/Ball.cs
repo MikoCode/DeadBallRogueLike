@@ -5,28 +5,22 @@ using UnityEngine.Experimental.Rendering.Universal;
 
 public class Ball : MonoBehaviour
 {
-    public  Rigidbody2D rb;
-    public  PlayerController playerCon;
-    private CircleCollider2D box;
-    public  ParticleSystem wallTouch;
-    public ParticleSystem enemyTouch;
-    private GameManager gM;
+  
     public  float ballPower;
     public  int hz, vt;
-    public  bool first;
-    public  bool destroyable;
-    public  bool startDynamicly;
-    public bool returning, canReturn;
+    public bool first, destroyable, startDynamicly, returning, canReturn;
     private bool didSavePos;
-    private float posY;
-    private float savedPosY;
-    private float time;
-    private float posX;
-    private float savedPosX;
+    private float posY, savedPosY, time, posX, savedPosX;
     public AudioClip hitSound;
     public AudioSource source;
     public Light2D light;
     private SpriteRenderer sprite;
+    public Rigidbody2D rb;
+    public PlayerController playerCon;
+    private CircleCollider2D box;
+    public ParticleSystem wallTouch;
+    public ParticleSystem enemyTouch;
+    private GameManager gM;
 
 
 

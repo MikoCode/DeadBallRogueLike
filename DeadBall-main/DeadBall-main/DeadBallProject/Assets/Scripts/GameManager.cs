@@ -7,6 +7,14 @@ using UnityEngine.UI;
 
 public class GameManager : MonoBehaviour
 {
+
+    public int currentLevel, startTime, questsDone, requieredQuests, enemiesKilled, health, goalsCount, enemiesRequiered, enemiesAlive,highScore;
+    public bool gameOn, goalSkip, multipleQuestLevel, find, spawnLate, isBallReturning, MainMenu, gameOver, soundOff, musicQuieter, paused, musicLouder;
+    private int goals;
+    public Image pauseImage, musicImage;
+    public TextMeshProUGUI pauseText;
+    public Sprite[] music;
+    public Button musicButton;
     public TextMeshProUGUI goal;
     public TextMeshProUGUI[] YouDied;
     public Button RestartButton;
@@ -14,37 +22,11 @@ public class GameManager : MonoBehaviour
     public Transform doors;
     public Spawner spawner;
     public Image[] hearth;
-    public int currentLevel;
-    public int startTime;
-    public int questsDone;
-    public int requieredQuests;
-    public int enemiesKilled;
-    public int health;
-    public int enemiesRequiered;
-    public bool gameOn;
-    public bool goalSkip;
-    public bool multipleQuestLevel;
-    public bool find;
-    public bool spawnLate;
-    public bool isBallReturning;
-    public bool MainMenu;
-    public bool gameOver;
     public Move[] smoothTransition;
     public GameObject audioObject, newAudioObject;
-    public int enemiesAlive;
-    public bool soundOff;
-    public bool musicQuieter;
-    public bool musicLouder;
-    private int goals;
-    public int highScore;
-    public Image pauseImage, musicImage;
-    public TextMeshProUGUI pauseText;
-    public bool paused;
-    public Sprite[] music;
-    public Button musicButton;
-    public int goalsCount;
-    
-    
+
+
+
 
 
     // Start is called before the first frame update
@@ -242,6 +224,7 @@ public class GameManager : MonoBehaviour
             smoothTransition[i].timetoMove = true;
             smoothTransition[i].timetoMove = true;
         }
+        
         
        
       

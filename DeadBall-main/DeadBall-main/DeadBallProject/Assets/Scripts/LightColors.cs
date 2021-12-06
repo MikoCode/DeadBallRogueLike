@@ -13,7 +13,7 @@ public class LightColors : MonoBehaviour
     {
         c1 = Random.Range(0, 5);
         c2 = Random.Range(0, 5);
-        if(c2 == c1)
+        if (c2 == c1)
         {
             c2 += 1;
         }
@@ -24,10 +24,4 @@ public class LightColors : MonoBehaviour
         light2.intensity = 1.5f;
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-       
-
-    }
 }

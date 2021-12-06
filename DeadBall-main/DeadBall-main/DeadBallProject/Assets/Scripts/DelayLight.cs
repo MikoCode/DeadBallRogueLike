@@ -14,13 +14,6 @@ public class DelayLight : MonoBehaviour
         Invoke("TurnOn", t);
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
-
-
     void TurnOn()
     {
         light.intensity = lightIntensity;

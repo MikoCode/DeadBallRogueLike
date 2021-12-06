@@ -4,30 +4,24 @@ using UnityEngine;
 
 public class Spawner : MonoBehaviour
 {
+  
+    public float spawnTime;
+    public int howManyTimes, howManyEnemies, howLong, waveType, wavesCount, waves, enemiesSum;
+    public bool spawn, canDestroyDoors;
+    private bool checkSize;
+    private int howManySpinners, howManyShooters;
+    private int pitchType, whichShooter, wave1Shooters, waveCooldown;
     public GameObject[] Enemies;
     public GameObject[] covers;
     public GameObject goalKeeper;
     private GameObject box;
     public ParticleSystem preSpawn;
     public ParticleSystem bigPreSpawn;
-    public Vector2 goalPos;
     public GameManager gM;
     public Randomizer rand;
     public Vector2 center;
     public Vector2 size;
-    public float spawnTime;
-    public int howManyTimes, howManyEnemies, howLong, waveType;
-    public bool spawn;
-    private bool checkSize;
-    public int enemiesSum;
-    private int howManySpinners, howManyShooters;
-    private int waveCooldown;
-    public bool canDestroyDoors;
-    private int pitchType;
-    private int whichShooter;
-    private int wave1Shooters;
-    public int wavesCount;
-    public int waves;
+    public Vector2 goalPos;
 
     // Start is called before the first frame update
     void Start()
@@ -37,7 +31,6 @@ public class Spawner : MonoBehaviour
 
         whichShooter = 2;
         waveType = 0;
-        
         
     }
 
@@ -60,24 +53,18 @@ public class Spawner : MonoBehaviour
 
         if (spawn == true)
         {
-
             StartCoroutine("Wave0");
-
 
             spawn = false;
         }
 
-        
-
     }
-
 
     IEnumerator Wave0()
     {
-        
         SpawnerSize();
         yield return new WaitForSeconds(spawnTime);
-        
+
         for (int i = 1; i <= waves; i++)
         {
             wavesCount += 1;
@@ -92,10 +79,6 @@ public class Spawner : MonoBehaviour
                     ParticleSystem particle = Instantiate(preSpawn, pos, Quaternion.identity);
                     particle.startColor = enemy.GetComponent<SpriteRenderer>().color;
 
-
-
-                   
-
                 }
 
 
@@ -106,14 +89,12 @@ public class Spawner : MonoBehaviour
                     {
                         enemiesSum += 1;
                         Vector2 pos = center + new Vector2(Random.Range(-size.x / 2, size.x / 2), Random.Range(-size.y / 2, size.y / 2));
-                        GameObject enemy = Instantiate(Enemies[Random.Range(1,whichShooter)], pos, Quaternion.identity);
+                        GameObject enemy = Instantiate(Enemies[Random.Range(1, whichShooter)], pos, Quaternion.identity);
                         ParticleSystem particle = Instantiate(preSpawn, pos, Quaternion.identity);
                         particle.startColor = enemy.GetComponent<SpriteRenderer>().color;
-                        
+
                     }
 
-
-                    
                 }
                 yield return new WaitForSeconds(4);
 
@@ -128,8 +109,6 @@ public class Spawner : MonoBehaviour
                     GameObject enemy = Instantiate(Enemies[Random.Range(1, whichShooter)], pos, Quaternion.identity);
                     ParticleSystem particle = Instantiate(preSpawn, pos, Quaternion.identity);
                     particle.startColor = enemy.GetComponent<SpriteRenderer>().color;
-
-                   
 
                 }
                 yield return new WaitForSeconds(waveCooldown);
@@ -147,41 +126,17 @@ public class Spawner : MonoBehaviour
 
                 }
 
-
                 yield return new WaitForSeconds(waveCooldown * 1.4f);
 
             }
 
-
-
-
-
-           
             Difficulty();
 
             yield return new WaitForSeconds(howLong);
-
-          
-
-
-            
-
-
         }
-
 
         canDestroyDoors = true;
     }
-
-
-
-
-
-
-
-
-
-
 
     private void OnDrawGizmosSelected()
     {
@@ -189,7 +144,6 @@ public class Spawner : MonoBehaviour
         Gizmos.DrawCube(center, size);
 
     }
-
 
    public void SpawnerSize()
     {
@@ -213,13 +167,11 @@ public class Spawner : MonoBehaviour
         }
     }
 
-
     void CoversSpawn() // jesli obie sie dotkn¹ musza sie zniszczyc
 
     {
         if (rand.blockades == true)
         {
-
 
             Vector2 pos = center + new Vector2(Random.Range(-size.x / 2.3f, size.x / 2.3f), Random.Range(-size.y / 2.3f, size.y / 2.3f));
 
@@ -238,12 +190,9 @@ public class Spawner : MonoBehaviour
                     pos += new Vector2(Random.Range(2, 6), Random.Range(2, 6));
                 }
 
-
-
             }
          }
         
-
         }
 
 
@@ -254,7 +203,6 @@ public class Spawner : MonoBehaviour
                 waveType = 0;
                 waves = Random.Range(1, 3);
                
-
             }
 
             else if (gM.currentLevel >= 2 && gM.currentLevel <= 7)
@@ -298,16 +246,10 @@ public class Spawner : MonoBehaviour
             howManyShooters = Random.Range(2, 4);
             waves = Random.Range(2, 4);
 
-
-
-
-
-
         }
             else if (gM.currentLevel > 12 && gM.currentLevel <= 17)
         {
 
-           
             if (Random.Range(0,4) == 2)
 
             {
@@ -338,16 +280,10 @@ public class Spawner : MonoBehaviour
     }
 
 
-
-
-
-
-
     void EnemiesCount()
     {
         if (waveType == 0)
         {
-
 
             if(gM.currentLevel < 10)
             {
@@ -359,7 +295,6 @@ public class Spawner : MonoBehaviour
                 
             }
 
-            
         }
         else if (waveType == 1 || waveType == 2)
         {
@@ -378,9 +313,4 @@ public class Spawner : MonoBehaviour
         }
     }
 
-    void Propability()
-    {
-       
-    }
-    
 }

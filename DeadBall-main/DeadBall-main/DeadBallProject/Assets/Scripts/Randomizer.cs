@@ -5,13 +5,14 @@ using UnityEngine;
 public class Randomizer : MonoBehaviour
 {
 
-    public GameObject[] pitch;
-    public int place, covers, enemies, waves;
+    
+    public int place, covers, enemies, waves, goalkeeperLevel;
     public bool blockades;
     public bool isGoalkeeper, horizontalType;
+    public GameObject[] pitch;
     public Spawner spawner;
     public GameManager gM;
-    public int goalkeeperLevel;
+   
     // Start is called before the first frame update
     void Start()
     {
